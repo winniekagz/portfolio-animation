@@ -39,7 +39,6 @@ export function PageStackProvider({ children }: { children: React.ReactNode }) {
 
     if (previousPathnameRef.current === pathname) return;
 
-    const prevPath = previousPathnameRef.current;
     previousPathnameRef.current = pathname;
 
     if (reducedMotion) {
@@ -88,26 +87,27 @@ export function PageStackProvider({ children }: { children: React.ReactNode }) {
     };
   }, [pathname, children, reducedMotion]);
 
+  // Not transitioning: render in normal document flow so sticky navbar and footer work correctly.
+  if (!isTransitioning) {
+    return <>{displayedChildren}</>;
+  }
+
+  // Transitioning: use absolute stacking only during the slide-up animation.
   return (
     <div className="relative min-h-screen w-full bg-background">
-      {/* Background layer: previous page (or current when not transitioning). */}
       <div
-        className="absolute inset-0 z-0 min-h-screen w-full"
-        aria-hidden={isTransitioning}
+        className="absolute inset-0 z-0 min-h-screen w-full overflow-hidden"
+        aria-hidden
       >
         {displayedChildren}
       </div>
 
-      {/* Foreground animated layer: new page slides up. Only mount when we have new children to show. */}
-      {isTransitioning && (
-        <div
-          ref={stackLayerRef}
-          className="absolute inset-0 z-10 min-h-screen w-full overflow-auto bg-background"
-          aria-hidden={false}
-        >
-          {children}
-        </div>
-      )}
+      <div
+        ref={stackLayerRef}
+        className="absolute inset-0 z-10 min-h-screen w-full bg-background"
+      >
+        {children}
+      </div>
     </div>
   );
 }

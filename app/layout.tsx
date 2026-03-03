@@ -7,11 +7,9 @@ import { PageStackProvider } from "@/components/providers/PageStackProvider";
 import { Navbar } from "@/components/organisms/Navbar";
 import { AnimatedMenu } from "@/components/organisms/AnimatedMenu";
 import { CustomCursor } from "@/components/organisms/CustomCursor";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
 
-/**
- * Good Pro (body). Next.js optimizes and self-hosts these local files.
- * Files: public/fonts/goodpro/ (from your Good Pro package).
- */
+
 const fontBody = localFont({
   src: [
     { path: "../public/fonts/goodpro/FFGoodPro-Regular.woff2", weight: "400" },
@@ -55,6 +53,7 @@ export default function RootLayout({
             <PageStackProvider>
               {children}
             </PageStackProvider>
+            <SiteFooter />
             <AnimatedMenu />
             <CustomCursor />
           </MenuProvider>
