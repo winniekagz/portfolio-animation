@@ -4,6 +4,7 @@ import "./globals.css";
 import { CursorProvider } from "@/contexts/CursorContext";
 import { MenuProvider } from "@/contexts/MenuContext";
 import { PageStackProvider } from "@/components/providers/PageStackProvider";
+import { LenisProvider } from "@/components/providers/LenisProvider";
 import { Navbar } from "@/components/organisms/Navbar";
 import { AnimatedMenu } from "@/components/organisms/AnimatedMenu";
 import { CustomCursor } from "@/components/organisms/CustomCursor";
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body
         className={`${fontBody.variable} ${fontDisplay.variable} antialiased bg-background text-foreground`}
       >
+        <LenisProvider>
         <CursorProvider>
           <MenuProvider>
             <Navbar />
@@ -58,6 +60,7 @@ export default function RootLayout({
             <CustomCursor />
           </MenuProvider>
         </CursorProvider>
+        </LenisProvider>
       </body>
     </html>
   );
