@@ -67,25 +67,7 @@ export function HeroSection() {
       "-=0.25"
     );
 
-    // ── Scroll zoom on flower ─────────────────────────────────────
-    // As the hero scrolls out (next section slides over), the flower
-    // zooms up and fades — scroll-linked via scrub.
-    const scrollCtx = gsap.context(() => {
-      gsap.to(flowerRef.current, {
-        scale: 3.5,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
-    });
-
     return () => {
-      scrollCtx.revert();
       tl.kill();
     };
   }, [reducedMotion]);
@@ -93,7 +75,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="sticky top-0 z-0 h-screen overflow-hidden bg-brand-bg"
+      className="relative h-screen overflow-hidden bg-brand-bg"
     >
       {/*
        * Flower — 100×100px, fully visible at top-left below the navbar.

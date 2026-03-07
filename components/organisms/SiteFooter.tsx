@@ -139,7 +139,7 @@ export function SiteFooter() {
   return (
     <footer
       ref={footerRef}
-      className={cn(glass(), "relative overflow-hidden border-t px-8 py-10 md:px-12")}
+      className={cn("bg-brand-bg", glass(), "relative overflow-hidden border-t px-8 py-10 md:px-12")}
     >
       <div className="mx-auto flex max-w-7xl items-center gap-10">
 
