@@ -22,18 +22,15 @@ export function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+  // Lazy initializer avoids a synchronous setState inside an effect.
+  const [isTouch] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  });
   const ringX = useRef(0);
   const ringY = useRef(0);
   const dotX = useRef(0);
   const dotY = useRef(0);
-
-  useEffect(() => {
-    setIsTouch(
-      typeof window !== "undefined" &&
-        ("ontouchstart" in window || navigator.maxTouchPoints > 0)
-    );
-  }, []);
 
   useEffect(() => {
     if (isTouch || typeof window === "undefined") return;

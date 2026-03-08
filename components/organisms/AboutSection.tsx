@@ -52,7 +52,18 @@ export function AboutSection() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    if (reducedMotion) return;
+
+    // ── Reduced-motion: skip animation, immediately show all hidden elements ──
+    if (reducedMotion) {
+      gsap.set(bgRef.current, { opacity: 1 });
+      gsap.set(photoRef.current, { opacity: 0 });      // hide full-bleed cover
+      gsap.set(cardPhotoRef.current, { opacity: 1 });  // show the card portrait
+      gsap.set(eyebrowRef.current, { opacity: 1, y: 0 });
+      gsap.set(headlineRef.current, { opacity: 1, x: 0 });
+      gsap.set(rightRef.current, { opacity: 1, y: 0 });
+      gsap.set(iconsRef.current, { opacity: 1, y: 0 });
+      return;
+    }
 
     const section = sectionRef.current;
     if (!section) return;
@@ -279,7 +290,8 @@ export function AboutSection() {
         {/* CTA */}
         <a
           href="/about"
-          className="mt-1 inline-flex w-fit items-center rounded-full border border-brand-text px-8 py-3 font-body text-xs font-bold uppercase tracking-widest text-brand-text transition-all duration-300 hover:bg-brand-text hover:text-brand-bg"
+          aria-label="Learn more about Winfred Kagendo"
+          className="mt-1 inline-flex w-fit items-center rounded-full border border-brand-text px-8 py-3 font-body text-xs font-bold uppercase tracking-widest text-brand-text transition-all duration-300 hover:bg-brand-text hover:text-brand-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
         >
           Learn More
         </a>

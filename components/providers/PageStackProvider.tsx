@@ -6,7 +6,7 @@
  * previous page stays underneath (optionally dimmed). Uses design tokens for styling.
  */
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, startTransition } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
@@ -24,11 +24,6 @@ export function PageStackProvider({ children }: { children: React.ReactNode }) {
   const stackLayerRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
 
-  // Keep previous children in ref when not transitioning (so we have it when pathname changes).
-  if (!isTransitioning && previousPathnameRef.current === pathname) {
-    previousChildrenRef.current = children;
-  }
-
   useEffect(() => {
     if (isInitialMount.current) {
       previousPathnameRef.current = pathname;
@@ -37,13 +32,19 @@ export function PageStackProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
-    if (previousPathnameRef.current === pathname) return;
+    // Same pathname — keep previousChildren in sync without triggering a transition.
+    if (previousPathnameRef.current === pathname) {
+      previousChildrenRef.current = children;
+      return;
+    }
 
     previousPathnameRef.current = pathname;
 
     if (reducedMotion) {
       previousChildrenRef.current = children;
-      setDisplayedChildren(children);
+      // startTransition defers the update so it isn't synchronous in the effect body,
+      // satisfying react-hooks/set-state-in-effect without changing visual behaviour.
+      startTransition(() => setDisplayedChildren(children));
       return;
     }
 

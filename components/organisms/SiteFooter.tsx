@@ -249,6 +249,7 @@ export function SiteFooter() {
           <Image
             src="/image/winblack.jpeg"
             alt=""
+            aria-hidden="true"
             fill
             className="object-contain"
           />

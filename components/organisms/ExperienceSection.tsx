@@ -81,13 +81,13 @@ const EXPERIENCES = [
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
-function SplitWords({ text, wordClass }: { text: string; wordClass: string }) {
+function SplitWords({ text, wordClass }: Readonly<{ text: string; wordClass: string }>) {
   return (
     <>
       {text.split(" ").map((word, i) => (
-        <span key={i} className="inline-block">
-          <span className={`inline-block ${wordClass}`}>{word}</span>
-          {" "}
+      
+        <span key={`${word}-${i}`} className={`inline-block ${wordClass}`}>
+          {word}&nbsp;
         </span>
       ))}
     </>
@@ -114,9 +114,18 @@ function ExperienceEntry({
   const listRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    if (reducedMotion) return;
     const entry = entryRef.current;
     if (!entry) return;
+
+    // ── Reduced-motion: immediately reveal every element that starts hidden ──
+    if (reducedMotion) {
+      gsap.set(dotRef.current, { opacity: 1, scale: 1 });
+      gsap.set(companyRef.current, { clipPath: "none" });
+      gsap.set(metaRef.current, { opacity: 1, y: 0 });
+      const pills = pillsRef.current?.querySelectorAll(".exp-pill");
+      if (pills?.length) gsap.set(pills, { opacity: 1, scale: 1 });
+      return;
+    }
 
     const ctx = gsap.context(() => {
       const words = entry.querySelectorAll(`.exp-word-${exp.id}`);
@@ -240,7 +249,7 @@ function ExperienceEntry({
           className="mt-1 font-display uppercase text-brand-text whitespace-nowrap"
           style={{
             fontSize: "clamp(2rem, 3.8vw, 4.2rem)",
-            lineHeight: 0.95,
+            lineHeight: 1,
             letterSpacing: "-0.025em",
             clipPath: "inset(0 100% 0 0)",
           }}
@@ -262,13 +271,13 @@ function ExperienceEntry({
      
 
         {/* Highlight bullets */}
-        <ul ref={listRef} className="mt-6 flex flex-col gap-3 list-disc">
-          {exp.highlights.map((item, i) => (
+        <ul ref={listRef} className="mt-6 flex flex-col gap-3 list-none">
+          {exp.highlights.map((item) => (
             <li
-              key={i}
-              className="flex items-start gap-3 font-body text-base leading-relaxed text-brand-text-muted "
+              key={item}
+              className="flex items-start gap-3 font-body text-base leading-relaxed text-brand-text-muted"
             >
-            <Check size={14} className="text-brand-text-muted"/>
+              <Check size={14} aria-hidden="true" className="mt-1 shrink-0 text-brand-text-muted" />
               <span>
                 <SplitWords text={item} wordClass={`exp-word-${exp.id}`} />
               </span>
@@ -279,7 +288,7 @@ function ExperienceEntry({
           {exp.stack.map((tech) => (
             <span
               key={tech}
-              className="exp-pill rounded-full border border-brand-text/12 bg-accent px-3 py-1 font-body text-[0.68rem] uppercase tracking-wider text-black font-bold"
+              className="exp-pill rounded-full border border-brand-text/12 bg-accent px-3 py-1 font-body text-xs uppercase tracking-wider text-black font-bold"
               style={{ opacity: 0 }}
             >
               {tech}
@@ -296,12 +305,15 @@ function ExperienceEntry({
 export function ExperienceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const workTextRef = useRef<HTMLSpanElement>(null);
-  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const eyebrowRef = useRef<HTMLHeadingElement>(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    if (reducedMotion) return;
+    if (reducedMotion) {
+      gsap.set(eyebrowRef.current, { opacity: 1, y: 0 });
+      return;
+    }
     const section = sectionRef.current;
     if (!section) return;
 
@@ -336,20 +348,21 @@ export function ExperienceSection() {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-x-clip bg-brand-bg p-2">
+    <section ref={sectionRef} aria-labelledby="experience-heading" className="relative overflow-x-clip bg-brand-bg p-2">
   
 
       <div className="flex">
         {/* ── Left sticky panel ───────────────────────────────────────────── */}
         <div className=" hidden sticky top-0 lg:flex h-screen w-[40%] shrink-0 flex-col justify-center overflow-hidden pl-14">
           {/* Eyebrow */}
-          <span
+          <h2
+            id="experience-heading"
             ref={eyebrowRef}
             className="mb-4 font-body text-[0.8rem] font-bold uppercase tracking-[0.32em] text-brand-text-muted"
             style={{ opacity: 0 }}
           >
             Experience
-          </span>
+          </h2>
 
           {/* Ghost "WORK" — very large, faint, parallax */}
           <div className="relative -ml-2 select-none overflow-hidden">
@@ -411,7 +424,7 @@ export function ExperienceSection() {
         className="pointer-events-none absolute bottom-16 right-6 hidden -rotate-90 lg:block"
         aria-hidden
       >
-        <span className="font-body text-[0.5rem] uppercase tracking-[0.45em] text-brand-text/15">
+        <span className="font-body text-[0.6rem] uppercase tracking-[0.45em] text-brand-text/15">
           Featured work
         </span>
       </div>

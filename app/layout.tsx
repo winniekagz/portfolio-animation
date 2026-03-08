@@ -34,8 +34,9 @@ const fontDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Scrollytelling Landing",
-  description: "Immersive scrollytelling portfolio experience",
+  title: "Winfred Kagendo | Frontend Engineer",
+  description:
+    "Portfolio of Winfred Kagendo — Frontend & Mobile Engineer based in Nairobi, crafting immersive digital experiences with React, Next.js, and React Native.",
 };
 
 export default function RootLayout({
@@ -51,10 +52,19 @@ export default function RootLayout({
         <LenisProvider>
         <CursorProvider>
           <MenuProvider>
+            {/* Skip navigation — visible on focus for keyboard users (WCAG 2.4.1) */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-200 focus:rounded-lg focus:bg-brand-accent focus:px-5 focus:py-3 focus:font-body focus:text-sm focus:font-bold focus:text-brand-bg focus:shadow-lg"
+            >
+              Skip to main content
+            </a>
             <Navbar />
-            <PageStackProvider>
-              {children}
-            </PageStackProvider>
+            <main id="main-content">
+              <PageStackProvider>
+                {children}
+              </PageStackProvider>
+            </main>
             <SiteFooter />
             <AnimatedMenu />
             <CustomCursor />
