@@ -12,6 +12,9 @@ export type BlogPost = {
   title: string;
   summary: string;
   date: string;
+  category?: string;
+  readTime?: string;
+  url?: string;
   contentBlocks: ContentBlock[];
 };
 

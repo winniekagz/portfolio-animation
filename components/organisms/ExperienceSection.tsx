@@ -336,12 +336,12 @@ export function ExperienceSection() {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-x-clip bg-brand-bg">
+    <section ref={sectionRef} className="relative overflow-x-clip bg-brand-bg p-2">
   
 
       <div className="flex">
         {/* ── Left sticky panel ───────────────────────────────────────────── */}
-        <div className="sticky top-0 flex h-screen w-[40%] shrink-0 flex-col justify-center overflow-hidden pl-14">
+        <div className=" hidden sticky top-0 lg:flex h-screen w-[40%] shrink-0 flex-col justify-center overflow-hidden pl-14">
           {/* Eyebrow */}
           <span
             ref={eyebrowRef}
