@@ -24,9 +24,9 @@ const PREVIEW_DURATION = 0.35;
 const UNDERLINE_DURATION = 0.28;
 
 const SOCIAL_LINKS = [
-  { label: "GitHub", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Twitter", href: "#" },
+  { label: "GitHub",    href: "https://github.com/winniekagz" },
+  { label: "LinkedIn",  href: "https://linkedin.com/in/winfred-kagendo-3b099220b/" },
+  { label: "Twitter",   href: "#" },
   { label: "Instagram", href: "#" },
 ];
 

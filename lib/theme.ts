@@ -24,6 +24,12 @@ export const MENU_ITEMS = [
     preview: "/image/plan.jpg",
     previewAlt: "Blog section",
   },
+  {
+    label: "Contact",
+    href: "#contact",
+    preview: "/image/winblack.jpeg",
+    previewAlt: "Contact section",
+  },
 ] as const;
 
 export type MenuItem = (typeof MENU_ITEMS)[number];

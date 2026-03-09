@@ -4,17 +4,18 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-import { Globe, Mail, Users, GitFork } from "lucide-react";
+import { Globe, Mail } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/atoms/SocialIcons";
 
 // ─── copy ────────────────────────────────────────────────────────────────────
 const HEADLINE = "I Deliver Exceptional User Experiences Across Various Platforms.";
 const BIO =
   "As a Frontend Engineer with four years of experience, I've consistently poured my heart and soul into creating products that not only look great but feel amazing to use. Currently, I work as a Senior Engineer crafting immersive digital experiences.";
 const SOCIAL = [
-  { Icon: GitFork, label: "GitHub", href: "https://github.com/winniekagz" },
-  { Icon: Globe, label: "Website", href: "#" },
-  { Icon: Users, label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/" },
-  { Icon: Mail, label: "Email", href: "mailto:winniekagendo35@gmail.com" },
+  { Icon: GitHubIcon,   label: "GitHub",   href: "https://github.com/winniekagz",                        external: true },
+  { Icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/",   external: true },
+  { Icon: Globe,        label: "Website",  href: "#",                                                     external: false },
+  { Icon: Mail,         label: "Email",    href: "mailto:winniekagendo35@gmail.com",                      external: false },
 ];
 
 
@@ -316,14 +317,16 @@ export function AboutSection() {
         className="relative z-30 flex items-center gap-6 px-6 pb-10 pt-2 md:absolute md:bottom-10 md:left-14 md:px-0 md:pb-0 md:pt-0"
         style={{ opacity: 0 }}
       >
-        {SOCIAL.map(({ Icon, label, href }) => (
+        {SOCIAL.map(({ Icon, label, href, external }) => (
           <a
             key={label}
             href={href}
             aria-label={label}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
             className="text-brand-text-muted transition-colors duration-200 hover:text-brand-text"
           >
-            <Icon size={18} strokeWidth={1.5} />
+            <Icon className="h-[18px] w-[18px]" />
           </a>
         ))}
       </div>
