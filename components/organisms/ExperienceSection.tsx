@@ -209,7 +209,7 @@ function ExperienceEntry({
   }, [reducedMotion, exp.id, isLast]);
 
   return (
-    <div ref={entryRef} className="relative grid grid-cols-[20px_1fr] gap-x-8">
+    <div ref={entryRef} className="relative grid grid-cols-[20px_1fr] gap-x-4 md:gap-x-8">
       {/* ── Timeline column ───────────────────────────── */}
       <div className="relative flex flex-col items-center pt-2">
         {/* Dot */}
@@ -243,12 +243,12 @@ function ExperienceEntry({
           </span>
      
 
-     <div className=" flex gap-3">
+      <div className="flex flex-wrap items-end gap-x-3 gap-y-1">
         <h3
           ref={companyRef}
-          className="mt-1 font-display uppercase text-brand-text whitespace-nowrap"
+          className="mt-1 font-display uppercase text-brand-text"
           style={{
-            fontSize: "clamp(2rem, 3.8vw, 4.2rem)",
+            fontSize: "clamp(1.6rem, 3.8vw, 4.2rem)",
             lineHeight: 1,
             letterSpacing: "-0.025em",
             clipPath: "inset(0 100% 0 0)",
@@ -257,15 +257,14 @@ function ExperienceEntry({
           {exp.company}
         </h3>
 
-        {/* Role */}
-        <div ref={metaRef} className="mt-3 flex items-center gap-2" style={{ opacity: 0 }}>
-          <span className="w-px h-5 bg-brand-accent/60" />
-        
-           <span className="font-body text-xs font-bold uppercase tracking-[0.28em] text-brand-text-muted/60 whitespace-nowrap">
-          {exp.period}
-        </span>
+        {/* Period */}
+        <div ref={metaRef} className="mb-1 flex items-center gap-2" style={{ opacity: 0 }}>
+          <span className="h-5 w-px bg-brand-accent/60" />
+          <span className="font-body text-xs font-bold uppercase tracking-[0.28em] text-brand-text-muted/60">
+            {exp.period}
+          </span>
         </div>
-        </div>
+      </div>
 
         {/* Tech stack pills */}
      
@@ -348,7 +347,7 @@ export function ExperienceSection() {
   }, [reducedMotion]);
 
   return (
-    <section ref={sectionRef} aria-labelledby="experience-heading" className="relative overflow-x-clip bg-brand-bg p-2">
+    <section id="experience" ref={sectionRef} aria-labelledby="experience-heading" className="relative overflow-x-clip bg-brand-bg p-2">
   
 
       <div className="flex">
@@ -405,7 +404,22 @@ export function ExperienceSection() {
         </div>
 
         {/* ── Right scrollable panel ───────────────────────────────────────── */}
-        <div className="min-h-screen flex-1 py-[15vh] pr-14">
+        <div className="min-h-screen flex-1 px-6 py-[10vh] md:py-[15vh] md:pl-0 md:pr-14">
+
+          {/* Mobile-only section heading (left panel is lg:hidden) */}
+          <div className="mb-10 lg:hidden">
+            <p className="font-body text-[0.8rem] font-bold uppercase tracking-[0.32em] text-brand-text-muted">
+              Experience
+            </p>
+            <p
+              className="mt-1 font-display uppercase leading-none text-brand-text/5 select-none"
+              aria-hidden
+              style={{ fontSize: "clamp(4rem, 18vw, 8rem)", letterSpacing: "-0.05em" }}
+            >
+              Work
+            </p>
+          </div>
+
           <div className="max-w-lg">
             {EXPERIENCES.map((exp, i) => (
               <ExperienceEntry

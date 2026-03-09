@@ -74,6 +74,7 @@ export function HeroSection() {
 
   return (
     <section
+      id="hero"
       ref={sectionRef}
       className="relative h-screen overflow-hidden bg-brand-bg"
     >
@@ -106,7 +107,7 @@ export function HeroSection() {
 
           <span
             ref={eyebrowRef}
-            className="font-body text-sm font-bold uppercase tracking-widest text-brand-accent"
+            className="font-body text-xl font-bold uppercase tracking-widest text-brand-accent"
           >
             {EYEBROW}
           </span>

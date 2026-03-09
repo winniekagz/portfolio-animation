@@ -1,29 +1,28 @@
 
-
 export const MENU_ITEMS = [
   {
-    label: "Projects",
-    href: "/projects",
+    label: "Home",
+    href: "#hero",
     preview: "/image/3d.png",
-    previewAlt: "Project preview",
+    previewAlt: "Hero section",
   },
   {
     label: "About",
-    href: "/about",
+    href: "#about",
     preview: "/image/win.jpeg",
-    previewAlt: "Portrait preview",
+    previewAlt: "About section",
   },
   {
-    label: "Services",
-    href: "/services",
+    label: "Experience",
+    href: "#experience",
     preview: "/image/service.jpg",
-    previewAlt: "Services preview",
+    previewAlt: "Experience section",
   },
   {
-    label: "Contact",
-    href: "/contact",
+    label: "Blog",
+    href: "#blog",
     preview: "/image/plan.jpg",
-    previewAlt: "Contact preview",
+    previewAlt: "Blog section",
   },
 ] as const;
 

@@ -7,16 +7,15 @@
  */
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { X } from "lucide-react";
 import gsap from "gsap";
-import { usePathname } from "next/navigation";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useEventListener } from "@/hooks/useEventListener";
 import { MENU_ITEMS, type MenuItem } from "@/lib/theme";
 import { useCursor } from "@/contexts/CursorContext";
 import { useMenu } from "@/contexts/MenuContext";
+import { useLenis } from "@/contexts/LenisContext";
 import { cn } from "@/lib/utils";
 
 const MENU_OPEN_DURATION = 0.75;
@@ -32,7 +31,7 @@ const SOCIAL_LINKS = [
 ];
 
 export function AnimatedMenu() {
-  const pathname = usePathname();
+  const lenis = useLenis();
   const menuContext = useMenu();
   const { isOpen, close, triggerRef } = menuContext ?? {
     isOpen: false,
@@ -53,16 +52,16 @@ export function AnimatedMenu() {
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const didOpenOnceRef = useRef(false);
 
-  const activeItem = MENU_ITEMS.find((item) => pathname === item.href) ?? MENU_ITEMS[0];
+  const activeItem = MENU_ITEMS[0];
   const previewItem = hoverItem ?? activeItem;
 
-  // Underline scale on active / hover
+  // Underline scale on hover
   useEffect(() => {
     if (reducedMotion) return;
     MENU_ITEMS.forEach((item) => {
       const el = underlineRefs.current.get(item.href);
       if (!el) return;
-      const show = pathname === item.href || hoverItem?.href === item.href;
+      const show = hoverItem?.href === item.href;
       gsap.to(el, {
         scaleX: show ? 1 : 0,
         duration: UNDERLINE_DURATION,
@@ -70,7 +69,7 @@ export function AnimatedMenu() {
         transformOrigin: "left center",
       });
     });
-  }, [pathname, hoverItem, reducedMotion]);
+  }, [hoverItem, reducedMotion]);
 
   const closeMenu = useCallback(() => {
     if (!isOpen) return;
@@ -172,14 +171,14 @@ export function AnimatedMenu() {
       >
         {/* ── Top bar ─────────────────────────────────────────────── */}
         <div className="flex items-center justify-between px-8 py-5 md:px-12">
-          <Link
-            href="/"
-            onClick={closeMenu}
+          <a
+            href="#hero"
+            onClick={(e) => { e.preventDefault(); closeMenu(); lenis?.scrollTo("#hero", { duration: 1.4 }); }}
             className="font-display text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             style={{ fontSize: "var(--font-size-h3)", lineHeight: "var(--leading-h3)" }}
           >
             Winfred Kagendo
-          </Link>
+          </a>
 
           {/* Close – text + icon, matches position of MenuTrigger */}
           <button
@@ -219,15 +218,18 @@ export function AnimatedMenu() {
           >
             <ul className="flex flex-col">
               {MENU_ITEMS.map((item, i) => {
-                const isActive = pathname === item.href;
                 return (
                   <li
                     key={item.href}
                     ref={(el) => { navItemRefs.current[i] = el; }}
                   >
-                    <Link
+                    <a
                       href={item.href}
-                      onClick={closeMenu}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        closeMenu();
+                        lenis?.scrollTo(item.href, { duration: 1.4 });
+                      }}
                       onMouseEnter={() => { setHoverItem(item); setHoveringMenuLink?.(true); }}
                       onMouseLeave={() => { setHoverItem(null); setHoveringMenuLink?.(false); }}
                       className={cn(
@@ -240,14 +242,11 @@ export function AnimatedMenu() {
                       <span className="relative z-10">{item.label}</span>
                       <span
                         ref={(el) => { if (el) underlineRefs.current.set(item.href, el); }}
-                        className={cn(
-                          "absolute bottom-1 left-0 h-[1.5px] bg-foreground origin-left",
-                          isActive ? "scale-x-100" : "scale-x-0",
-                        )}
+                        className="absolute bottom-1 left-0 h-[1.5px] bg-foreground origin-left scale-x-0"
                         style={{ width: "100%" }}
                         aria-hidden
                       />
-                    </Link>
+                    </a>
                   </li>
                 );
               })}

@@ -1,25 +1,75 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { MenuTrigger } from "@/components/molecules/MenuTrigger";
 import { cn } from "@/lib/utils";
-import { glass } from "@/lib/glass";
 import { MENU_ITEMS } from "@/lib/theme";
+import { useLenis } from "@/contexts/LenisContext";
 
 export function Navbar() {
-  const pathname = usePathname();
+  const lenis = useLenis();
+  const [scrolled, setScrolled] = useState(false);
+  const [activeHref, setActiveHref] = useState<string>("#hero");
+
+  // Increase navbar opacity when user scrolls down
+  useEffect(() => {
+    if (!lenis) return;
+    const handler = ({ scroll }: { scroll: number }) => {
+      setScrolled(scroll > 60);
+    };
+    lenis.on("scroll", handler);
+    return () => lenis.off("scroll", handler);
+  }, [lenis]);
+
+  // Track active section with IntersectionObserver
+  useEffect(() => {
+    const sectionIds = MENU_ITEMS.map((item) => item.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveHref(`#${id}`); },
+        { threshold: 0.35 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, []);
+
+  const scrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(href, { duration: 1.4 });
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [lenis]);
 
   return (
-    <header className={cn(glass(), "sticky top-0 z-40 w-full border-b")}>
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full border-b transition-[background-color] duration-500",
+        "backdrop-blur-md"
+      )}
+      style={{
+        borderColor: "rgb(255 255 255 / 0.08)",
+        backgroundColor: scrolled ? "rgba(16, 19, 15, 0.9)" : "rgb(255 255 255 / 0.04)",
+      }}
+    >
       <nav
         className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8"
         aria-label="Main"
       >
         {/* Logo */}
-        <Link
-          href="/"
+        <a
+          href="#hero"
+          onClick={(e) => scrollTo(e, "#hero")}
           className="flex items-center gap-3 font-display text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           style={{ fontSize: "var(--font-size-h3)", lineHeight: "var(--leading-h3)" }}
         >
@@ -31,25 +81,17 @@ export function Navbar() {
             className="h-11 w-11 rounded-full object-cover object-top"
           />
           <span>Winfred Kagendo</span>
-        </Link>
+        </a>
 
         {/* Horizontal nav — lg and above only */}
         <ul className="hidden items-center gap-8 lg:flex">
           {MENU_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = activeHref === item.href;
             return (
               <li key={item.href}>
-                {/*
-                 * Push-up hover effect:
-                 *   - Container is overflow-hidden with height = 1 line.
-                 *   - Two identical spans are stacked vertically inside.
-                 *   - On hover both translate up by their own height (-100%):
-                 *       span 1  →  slides out above the container
-                 *       span 2  →  slides in from below into view
-                 *   - Result: the text appears to be "pushed up" by the page.
-                 */}
-                <Link
+                <a
                   href={item.href}
+                  onClick={(e) => scrollTo(e, item.href)}
                   className={cn(
                     "group relative block overflow-hidden leading-none",
                     "font-body text-sm uppercase tracking-widest",
@@ -68,7 +110,7 @@ export function Navbar() {
                   >
                     {item.label}
                   </span>
-                </Link>
+                </a>
               </li>
             );
           })}

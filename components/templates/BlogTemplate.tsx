@@ -127,6 +127,7 @@ export async function BlogTemplate() {
 
   return (
     <section
+      id="blog"
       aria-labelledby="blog-section-heading"
       className="bg-brand-bg px-5 py-20 sm:px-8 md:px-12 lg:px-16"
     >

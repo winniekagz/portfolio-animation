@@ -13,36 +13,40 @@
  * new page feels locked or has wrong scroll behaviour.
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { LenisContext } from "@/contexts/LenisContext";
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const [lenis, setLenis] = useState<Lenis | null>(null);
   const pathname = usePathname();
 
   // ── Init Lenis once ────────────────────────────────────────────────────────
   useEffect(() => {
-    const lenis = new Lenis({
+    const l = new Lenis({
       duration: 1.4,
       smoothWheel: true,
       wheelMultiplier: 0.85,
       touchMultiplier: 1.8,
     });
 
-    lenisRef.current = lenis;
+    lenisRef.current = l;
+    setLenis(l);
 
-    lenis.on("scroll", ScrollTrigger.update);
+    l.on("scroll", ScrollTrigger.update);
 
-    const rafFn = (time: number) => lenis.raf(time * 1000);
+    const rafFn = (time: number) => l.raf(time * 1000);
     gsap.ticker.add(rafFn);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       gsap.ticker.remove(rafFn);
-      lenis.destroy();
+      l.destroy();
       lenisRef.current = null;
+      setLenis(null);
     };
   }, []);
 
@@ -60,5 +64,5 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     return () => cancelAnimationFrame(id);
   }, [pathname]);
 
-  return <>{children}</>;
+  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }
