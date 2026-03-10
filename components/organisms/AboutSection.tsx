@@ -326,7 +326,7 @@ export function AboutSection() {
             rel={external ? "noopener noreferrer" : undefined}
             className="text-brand-text-muted transition-colors duration-200 hover:text-brand-text"
           >
-            <Icon className="h-[18px] w-[18px]" />
+            <Icon className="h-4.5 w-4.5" />
           </a>
         ))}
       </div>
