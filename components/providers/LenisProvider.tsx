@@ -21,6 +21,7 @@ import { LenisContext } from "@/contexts/LenisContext";
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const previousPathnameRef = useRef<string | null>(null);
   const [lenis, setLenis] = useState<Lenis | null>(null);
   const pathname = usePathname();
 
@@ -34,7 +35,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     });
 
     lenisRef.current = l;
-    setLenis(l);
+    const setContextFrame = requestAnimationFrame(() => setLenis(l));
 
     l.on("scroll", ScrollTrigger.update);
 
@@ -43,10 +44,11 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      cancelAnimationFrame(setContextFrame);
       gsap.ticker.remove(rafFn);
       l.destroy();
       lenisRef.current = null;
-      setLenis(null);
+      requestAnimationFrame(() => setLenis(null));
     };
   }, []);
 
@@ -54,6 +56,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   // Wait two frames: one for React to commit the new page DOM, one for the
   // page-transition animation to begin. Then recalculate scroll bounds.
   useEffect(() => {
+    const isRouteChange = previousPathnameRef.current !== null && previousPathnameRef.current !== pathname;
+    previousPathnameRef.current = pathname;
+
+    if (isRouteChange) {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    }
+
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         lenisRef.current?.scrollTo(0, { immediate: true });

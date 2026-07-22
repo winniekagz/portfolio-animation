@@ -23,7 +23,9 @@ export type PinnedScrubTimelineConfig = {
 };
 
 /**
- * Creates a GSAP timeline with ScrollTrigger pin + scrub. Caller adds tweens to the returned timeline.
+ * Creates a GSAP timeline with ScrollTrigger scrub. Caller adds tweens to the returned timeline.
+ * Pinning is opt-in because it wraps/moves DOM nodes and can collide with
+ * React route unmounts when the trigger is a React-owned element.
  * Registers ScrollTrigger if needed.
  */
 export function createPinnedScrubTimeline(config: PinnedScrubTimelineConfig): gsap.core.Timeline {
@@ -33,7 +35,7 @@ export function createPinnedScrubTimeline(config: PinnedScrubTimelineConfig): gs
       trigger: config.trigger,
       start: config.start ?? "top top",
       end: config.end ?? "+=100%",
-      pin: config.pin ?? true,
+      pin: config.pin ?? false,
       scrub: config.scrub ?? true,
     },
   });

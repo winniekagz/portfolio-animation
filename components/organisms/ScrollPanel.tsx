@@ -14,8 +14,8 @@ import {
 /**
  * GSAP + ScrollTrigger timeline for the first (pinned) section:
  *
- * 1. ScrollTrigger pins the section when its top hits the viewport top.
- * 2. Pin lasts for 100% of viewport height of scroll (end: "+=100%").
+ * 1. ScrollTrigger links the section animation to scroll progress.
+ * 2. The section remains in normal document flow.
  * 3. A timeline runs: content animates from opacity 0 / y 24 → opacity 1 / y 0.
  * 4. scrub: true ties timeline progress to scroll position (scroll-driven, not time-driven).
  * 5. Desktop only (≥1024px); prefers-reduced-motion disables the effect.
@@ -50,7 +50,7 @@ export function ScrollPanel({
         trigger: section,
         start: "top top",
         end: "+=100%",
-        pin: true,
+        pin: false,
         scrub: true,
       });
       tl.fromTo(content, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1 });

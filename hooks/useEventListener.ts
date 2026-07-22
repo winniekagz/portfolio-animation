@@ -12,7 +12,10 @@ export function useEventListener<K extends keyof WindowEventMap>(
   options?: AddEventListenerOptions
 ): void {
   const handlerRef = useRef(handler);
-  handlerRef.current = handler;
+
+  useEffect(() => {
+    handlerRef.current = handler;
+  }, [handler]);
 
   useEffect(() => {
     const targetEl = target ?? window;
