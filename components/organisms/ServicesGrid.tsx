@@ -52,8 +52,8 @@ export function ServicesGrid() {
     >
       <div className="mx-auto max-w-6xl">
         <SectionTitle
-          title={<span id="services-heading">What we do</span>}
-          subtitle="Strategy, design, and motion for brands and products."
+          title={<span id="services-heading">Engineering Focus</span>}
+          subtitle="Architecture, product judgment, and implementation depth for frontend-heavy teams."
           className="text-center"
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">

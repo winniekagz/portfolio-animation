@@ -8,8 +8,8 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const Scene = dynamic(() => import("@/components/three/Scene"), { ssr: false });
 
-const HEADLINE = "Architecting High-Performance Frontends.";
-const EYEBROW = "Hi, I'm Winfred.";
+const HEADLINE = "Senior Frontend & Product Engineer.";
+const EYEBROW = "Winfred Kagendo.";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -133,12 +133,12 @@ export function HeroSection() {
               lineHeight: "var(--leading-body)",
             }}
           >
-            Frontend Engineer crafting immersive digital experiences.
+            I architect scalable frontend, mobile, and AI product systems that turn ambiguous business problems into maintainable software.
           </p>
 
           <div ref={locationRef}>
             <p className="font-body text-xs uppercase tracking-widest text-brand-text-muted/50">
-              Based in Nairobi &middot; Available for work
+              Based in Nairobi &middot; Frontend architecture, product engineering, AI integrations
             </p>
           </div>
 

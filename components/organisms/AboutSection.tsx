@@ -8,9 +8,9 @@ import { Globe, Mail } from "lucide-react";
 import { GitHubIcon, LinkedInIcon } from "@/components/atoms/SocialIcons";
 
 // ─── copy ────────────────────────────────────────────────────────────────────
-const HEADLINE = "I Deliver Exceptional User Experiences Across Various Platforms.";
+const HEADLINE = "I own product surfaces where frontend architecture, business constraints, and user experience meet.";
 const BIO =
-  "As a Frontend Engineer with four years of experience, I've consistently poured my heart and soul into creating products that not only look great but feel amazing to use. Currently, I work as a Senior Engineer crafting immersive digital experiences.";
+  "I am a Product and Frontend Engineer based in Nairobi with 5+ years across AI, fintech, healthcare, SaaS, and mobile. My work spans React, Next.js, TypeScript, React Native, design systems, performance, accessibility, and AI integrations, with the emphasis on engineering decisions that help teams ship durable products.";
 const SOCIAL = [
   { Icon: GitHubIcon,   label: "GitHub",   href: "https://github.com/winniekagz",                        external: true },
   { Icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/",   external: true },
@@ -108,16 +108,15 @@ export function AboutSection() {
         return;
       }
 
-      // ── Desktop: full pinned scroll animation ────────────────────────────
+      // ── Desktop: scroll-linked reveal without pinning.
+      // ScrollTrigger pinning wraps/moves the trigger node, which can collide
+      // with React route unmounts and cause removeChild NotFoundError.
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top top",
-          end: "+=180%",
-          pin: true,
-          pinType: "transform",
+          start: "top 78%",
+          end: "bottom 35%",
           scrub: 1.8,
-          anticipatePin: 1,
         },
       });
 

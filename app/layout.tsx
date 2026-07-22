@@ -34,9 +34,9 @@ const fontDisplay = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Winfred Kagendo | Frontend Engineer",
+  title: "Winfred Kagendo | Senior Frontend & Product Engineer",
   description:
-    "Portfolio of Winfred Kagendo — Frontend & Mobile Engineer based in Nairobi, crafting immersive digital experiences with React, Next.js, and React Native.",
+    "Portfolio of Winfred Kagendo, a Nairobi-based Senior Frontend and Product Engineer focused on frontend architecture, React, Next.js, React Native, design systems, performance, and AI product engineering.",
 };
 
 export default function RootLayout({

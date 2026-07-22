@@ -16,10 +16,10 @@ const EXPERIENCES = [
     period: "Jan 2026 – Present",
     stack: ["React.js", "React Native", "Tailwind CSS", "Expo", "Monorepos"],
     highlights: [
-      "Worked with monorepos to build scalable AI systems.",
-      "Created a mobile app using Expo and React Native.",
-      "Built a component library to improve developer experience.",
-      "Translated Figma designs for web and mobile and integrated APIs.",
+      "Contributed to monorepo-based AI product architecture, using shared package boundaries to keep web, mobile, and product workflows maintainable as the system expands.",
+      "Delivered a React Native and Expo mobile delivery decisions where cross-platform parity, release speed, and API integration quality mattered more than isolated screens.",
+      "Owned a shared component library to reduce repeated UI implementation and make product surfaces easier for engineers to extend consistently.",
+      "Translated Figma requirements into production web and mobile interfaces while clarifying API contracts and interaction edge cases before they reached implementation risk.",
     ],
   },
   {
@@ -29,10 +29,9 @@ const EXPERIENCES = [
     period: "Aug 2025 – Jan 2026",
     stack: ["React Native", "Alipay Mini App", "Figma", "API Integration"],
     highlights: [
-      "Pixel-perfect Figma to UI conversion across the product.",
-      "Created a full Alipay mini app shipped to production."
-      ,
-      "Seamless API integration across the mobile product.",
+      "Delivered mobile UI implementation quality by turning Figma specifications into production interfaces with attention to platform constraints and interaction detail.",
+      "Owned an Alipay mini app to production, balancing mini-app platform limitations with the product requirement for a complete mobile experience.",
+      "Integrated product APIs across mobile flows, tightening frontend and backend expectations around data shape, loading states, and error handling.",
     ],
   },
   {
@@ -42,11 +41,11 @@ const EXPERIENCES = [
     period: "Jul 2024 – Oct 2025",
     stack: ["React.js", "Next.js", "MUI", "Ant Design", "SEO"],
     highlights: [
-      "Improved retention with faster load times via SSR (Next.js).",
-      "Drove sales growth by building a Safaricom mini app with Ant Design Mini and API integrations.",
-      "Increased engagement by turning Figma designs into clean, responsive UIs (React, MUI).",
-      "Secured platforms with best-practice frontend security (XSS, CSRF protection).",
-      "Boosted SEO performance through server-side rendering and optimized metadata.",
+      "Chose server-side rendering for business-critical pages where faster perceived loading, indexability, and retention mattered more than a purely client-rendered implementation.",
+      "Owned a Safaricom mini app by aligning Ant Design Mini patterns with product requirements, API contracts, and the commercial need to support sales workflows.",
+      "Converted Figma systems into responsive React and MUI interfaces while preserving reusable patterns instead of one-off page implementation.",
+      "Raised frontend security quality by accounting for XSS and CSRF risks in the browser layer before sensitive flows reached production.",
+      "Improved SEO readiness through rendering and metadata decisions that made product pages more discoverable and easier to maintain.",
     ],
   },
   {
@@ -56,11 +55,10 @@ const EXPERIENCES = [
     period: "2023 – 2024",
     stack: ["Vue3.js", "Pinia", "GraphQL", "JavaScript"],
     highlights: [
-      "Transformed designs into dynamic UIs with JavaScript and React JS workflows.",
-      "Led UI development for a SaaS M&E system, collaborating with backend teams.",
-      "Enhanced user experience in an investment appraisal system.",
-      "Spearheaded UI creation using Vue3.js, delivering visually engaging designs.",
-      "Optimized state management with Pinia and API integration via GraphQL.",
+      "Owned frontend implementation for a SaaS monitoring and evaluation system, coordinating UI requirements with backend teams so product workflows mapped cleanly to data contracts.",
+      "Improved the investment appraisal experience by translating complex domain workflows into clearer interface states and interaction paths.",
+      "Used Vue 3 and Pinia to keep state management explicit in data-heavy flows where predictable updates were more important than local component convenience.",
+      "Integrated GraphQL APIs in ways that aligned query shape with screen-level needs, reducing unnecessary frontend data handling complexity.",
     ],
   },
   {
@@ -70,11 +68,10 @@ const EXPERIENCES = [
     period: "May 2023 – May 2024",
     stack: ["React.js", "TailwindCSS", "React Query", "Material UI"],
     highlights: [
-      "Translated Figma designs to seamless apps using React.js, TailwindCSS, and Material UI.",
-      "Reduced dev time by 30% and boosted team efficiency by 20% through reusable components.",
-      "Leveraged React tools to enhance app speed, scalability, and security.",
-      "Streamlined Agile workflows, ensuring timely delivery of high-quality features.",
-      "Worked closely with cross-functional teams to achieve project goals.",
+      "Owned creation of reusable React interface patterns that reduced development time by 30% and improved team efficiency by 20% across repeated healthcare product workflows.",
+      "Used React Query for server-state heavy screens where caching, loading states, and refetch behavior needed clearer ownership than component-local state.",
+      "Balanced Tailwind CSS and Material UI implementation choices to preserve design consistency while keeping delivery practical for the team.",
+      "Clarified requirements with cross-functional partners during Agile delivery so healthcare features shipped with fewer late-stage interpretation gaps.",
     ],
   },
 ] as const;

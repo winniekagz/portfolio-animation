@@ -38,6 +38,7 @@ function TwitterIcon({ className }: { className?: string }) {
 const NAV_LINKS = [
   { label: "About",      href: "#about" },
   { label: "Experience", href: "#experience" },
+  { label: "Projects",   href: "#projects" },
   { label: "Blog",       href: "#blog" },
   { label: "Contact",    href: "#contact" },
 ];
@@ -175,8 +176,8 @@ export function SiteFooter() {
             ref={bioRef}
             className="font-body text-xs leading-relaxed text-brand-text-muted"
           >
-            Frontend Engineer &amp; developer crafting immersive digital
-            experiences.
+            Senior Frontend &amp; Product Engineer architecting maintainable web,
+            mobile, and AI product systems.
           </p>
         </div>
 
@@ -196,7 +197,11 @@ export function SiteFooter() {
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  lenis?.scrollTo(link.href, { duration: 1.4 });
+                  if (document.querySelector(link.href)) {
+                    lenis?.scrollTo(link.href, { duration: 1.4 });
+                  } else {
+                    window.location.href = `/${link.href}`;
+                  }
                 }}
                 className="font-body text-xs font-bold uppercase tracking-widest text-brand-text transition-colors duration-200 hover:text-brand-accent"
               >
