@@ -19,6 +19,12 @@ export const MENU_ITEMS = [
     previewAlt: "Experience section",
   },
   {
+    label: "Projects",
+    href: "#projects",
+    preview: "/image/blue-abstract.png",
+    previewAlt: "Projects and case studies section",
+  },
+  {
     label: "Blog",
     href: "#blog",
     preview: "/image/plan.jpg",

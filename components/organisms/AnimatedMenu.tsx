@@ -226,9 +226,14 @@ export function AnimatedMenu() {
                     <a
                       href={item.href}
                       onClick={(e) => {
-                        e.preventDefault();
                         closeMenu();
-                        lenis?.scrollTo(item.href, { duration: 1.4 });
+                        if (!item.href.startsWith("#")) return;
+                        e.preventDefault();
+                        if (document.querySelector(item.href)) {
+                          lenis?.scrollTo(item.href, { duration: 1.4 });
+                        } else {
+                          window.location.href = `/${item.href}`;
+                        }
                       }}
                       onMouseEnter={() => { setHoverItem(item); setHoveringMenuLink?.(true); }}
                       onMouseLeave={() => { setHoverItem(null); setHoveringMenuLink?.(false); }}

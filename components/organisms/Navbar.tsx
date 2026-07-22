@@ -44,6 +44,10 @@ export function Navbar() {
   const scrollTo = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("#")) return;
     e.preventDefault();
+    if (!document.querySelector(href)) {
+      window.location.href = `/${href}`;
+      return;
+    }
     if (lenis) {
       lenis.scrollTo(href, { duration: 1.4 });
     } else {
