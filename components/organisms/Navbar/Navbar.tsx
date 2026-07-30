@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import { MenuTrigger } from "@/components/molecules/MenuTrigger";
+import { MenuTrigger } from "@/components/molecules";
 import { cn } from "@/lib/utils";
 import { MENU_ITEMS } from "@/lib/theme";
 import { useLenis } from "@/contexts/LenisContext";

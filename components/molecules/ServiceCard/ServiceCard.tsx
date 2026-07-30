@@ -1,8 +1,6 @@
 import { Layout, Palette, Sparkles } from "lucide-react";
 import type { Service } from "@/lib/types";
-import { CardBase } from "@/components/atoms/CardBase";
-import { Heading } from "@/components/atoms/Heading";
-import { Text } from "@/components/atoms/Text";
+import { CardBase, Heading, Text } from "@/components/atoms";
 
 const ICON_MAP = {
   palette: Palette,

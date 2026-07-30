@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudyTemplate } from "@/components/templates/CaseStudyTemplate";
+import { CaseStudyTemplate } from "@/components/templates";
 import { getCaseStudy } from "@/lib/data/case-studies";
 
 const study = getCaseStudy("componentiq");

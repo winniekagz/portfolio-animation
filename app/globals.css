@@ -4,14 +4,33 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Design tokens: docs/design-tokens.md */
+/*
+ * Design tokens: docs/design-tokens.md
+ *
+ * This palette is derived from winfredkagendo.com's brand tokens
+ * (aubergine / emerald / ink / pink) rather than a generic shadcn
+ * dark theme. See the brand site's tailwind theme for the source
+ * values this was built from:
+ *   aubergine   #4B1F35   aubergine-2  #6E2F50
+ *   emerald     #1C7A52
+ *   pink-1      #E0A8C6   pink-2       #E8B6CF
+ *   ink         #1C1816   aubergine-ink #F3E7EE
+ *   sand        #EDE6D7   lilac        #E9E1EA
+ *
+ * pink-1/pink-2 are the brand's own lightened-aubergine accents,
+ * built for exactly this problem (a legible accent on a dark
+ * surface), so they carry the accent role here instead of a new
+ * off-brand hue.
+ */
 @theme inline {
   /* Brand colors */
-  --color-brand-bg: #10130f;
+  --color-brand-bg: #15100f;
   --color-brand-text: #ffffff;
-  --color-brand-accent: #9995e6;
-  --color-brand-text-muted: rgba(255, 255, 255, 0.7);
-  --color-brand-surface: #1a1d1a;
+  --color-brand-accent: #e0a8c6;
+  --color-brand-accent-hover: #e8b6cf;
+  --color-brand-secondary: #3faf82;
+  --color-brand-text-muted: rgba(243, 231, 238, 0.7);
+  --color-brand-surface: #211619;
   /* Font families: layout.tsx sets --font-dm-sans (body) and --font-bebas-neue (display) */
   --font-display: var(--font-bebas-neue), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
@@ -83,77 +102,54 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
 }
 
+/*
+ * This site is intentionally always-dark, so brand tokens live
+ * directly in :root. The previous ".dark { ... }" block below this
+ * was untouched shadcn boilerplate (grayscale oklch + a generic
+ * chart rainbow) with the exact same variable names as :root — if
+ * anything ever toggled a ".dark" class onto the tree (some shadcn
+ * components do this automatically), it would silently override
+ * every brand color with gray. It's been removed rather than kept
+ * as dead/conflicting weight.
+ */
 :root {
   --radius: 0.625rem;
   /* Brand defaults (design-tokens.md) */
-  --background: #10130f;
+  --background: #15100f;
   --foreground: #ffffff;
-  --card: #1a1d1a;
+  --card: #211619;
   --card-foreground: #ffffff;
-  --popover: #1a1d1a;
+  --popover: #211619;
   --popover-foreground: #ffffff;
-  --primary: #9995e6;
-  --primary-foreground: #ffffff;
+  --primary: #e0a8c6;
+  --primary-foreground: #1c1816;
   --secondary: rgba(255, 255, 255, 0.1);
   --secondary-foreground: #ffffff;
-  --muted: #1a1d1a;
-  --muted-foreground: rgba(255, 255, 255, 0.7);
-  --accent: #9995e6;
-  --accent-foreground: #ffffff;
+  --muted: #211619;
+  --muted-foreground: rgba(243, 231, 238, 0.7);
+  --accent: #e0a8c6;
+  --accent-foreground: #1c1816;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(255, 255, 255, 0.12);
-  --input: rgba(255, 255, 255, 0.12);
-  --ring: #9995e6;
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: #1a1d1a;
+  --border: rgba(224, 168, 198, 0.12);
+  --input: rgba(224, 168, 198, 0.12);
+  --ring: #e0a8c6;
+  /* Chart ramp pulled from the brand palette instead of a generic
+     rainbow, so charts stay recognizably "us" if any appear. */
+  --chart-1: #4b1f35; /* aubergine */
+  --chart-2: #e0a8c6; /* pink-1 */
+  --chart-3: #1c7a52; /* emerald */
+  --chart-4: #ede6d7; /* sand */
+  --chart-5: #e9e1ea; /* lilac */
+  --sidebar: #211619;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #9995e6;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(153, 149, 230, 0.2);
+  --sidebar-primary: #e0a8c6;
+  --sidebar-primary-foreground: #1c1816;
+  --sidebar-accent: rgba(224, 168, 198, 0.2);
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: rgba(255, 255, 255, 0.12);
-  --sidebar-ring: #9995e6;
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-border: rgba(224, 168, 198, 0.12);
+  --sidebar-ring: #e0a8c6;
 }
 
 @layer base {
@@ -171,9 +167,13 @@
  * How glass works:
  *   backdrop-filter: blur()      — blurs whatever is *behind* the element
  *   backdrop-filter: saturate()  — boosts colour vibrancy of the blurred bg
- *   background: white/α          — semi-transparent tint over the blur
- *   border: white/α              — thin rim catches light, adds depth
+ *   background: tint/α           — semi-transparent tint over the blur
+ *   border: tint/α                — thin rim catches light, adds depth
  *   box-shadow (inset)           — 1px top inner highlight simulates light hitting the edge
+ *
+ * Tint is brand pink-1 (#E0A8C6) at low alpha rather than pure white —
+ * same blur/saturate mechanics, but the glass itself reads as "ours"
+ * instead of generic frosted-glass-anywhere.
  *
  * Two strengths:
  *   .glass        — subtle, for surfaces sitting on top of content (navbar, footer)
@@ -181,18 +181,18 @@
  */
 @layer components {
   .glass {
-    background-color: rgb(255 255 255 / 0.04);
+    background-color: rgb(224 168 198 / 0.05);
     backdrop-filter: blur(12px) saturate(1.5);
     -webkit-backdrop-filter: blur(12px) saturate(1.5);
-    border-color: rgb(255 255 255 / 0.08);
+    border-color: rgb(224 168 198 / 0.1);
     box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.06);
   }
 
   .glass-strong {
-    background-color: rgb(255 255 255 / 0.08);
+    background-color: rgb(224 168 198 / 0.09);
     backdrop-filter: blur(24px) saturate(1.8);
     -webkit-backdrop-filter: blur(24px) saturate(1.8);
-    border-color: rgb(255 255 255 / 0.12);
+    border-color: rgb(224 168 198 / 0.15);
     box-shadow:
       inset 0 1px 0 0 rgb(255 255 255 / 0.10),
       0 4px 24px 0 rgb(0 0 0 / 0.25);

@@ -1,4 +1,4 @@
-import { BlogTemplate } from "@/components/templates/BlogTemplate";
+import { BlogTemplate } from "@/components/templates";
 
 export default function BlogPage() {
   return <BlogTemplate />;

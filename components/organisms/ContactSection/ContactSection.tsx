@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Mail, Phone, MapPin, Clock, ArrowUpRight } from "lucide-react";
-import { GitHubIcon, LinkedInIcon } from "@/components/atoms/SocialIcons";
+import { GitHubIcon, LinkedInIcon } from "@/components/atoms";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 

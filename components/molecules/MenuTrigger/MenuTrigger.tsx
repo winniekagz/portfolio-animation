@@ -6,7 +6,7 @@
  */
 
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/atoms/Button";
+import { Button } from "@/components/atoms";
 import { useMenu } from "@/contexts/MenuContext";
 import { cn } from "@/lib/utils";
 

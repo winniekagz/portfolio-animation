@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseStudyTemplate } from "@/components/templates/CaseStudyTemplate";
-import { OfflineFirstCaseStudy } from "@/components/templates/OfflineFirstCaseStudy";
+import { CaseStudyTemplate, OfflineFirstCaseStudy } from "@/components/templates";
 import { caseStudies, getCaseStudy } from "@/lib/data/case-studies";
 
 type ProjectPageProps = {

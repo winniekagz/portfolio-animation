@@ -267,6 +267,10 @@ function ExperienceEntry({
      
 
         {/* Highlight bullets */}
+          <article
+          
+              className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5 transition hover:border-brand-accent/50"
+            >
         <ul ref={listRef} className="mt-6 flex flex-col gap-3 list-none">
           {exp.highlights.map((item) => (
             <li
@@ -280,6 +284,7 @@ function ExperienceEntry({
             </li>
           ))}
         </ul>
+
            <div ref={pillsRef} className="mt-5 flex flex-wrap gap-2">
           {exp.stack.map((tech) => (
             <span
@@ -291,6 +296,7 @@ function ExperienceEntry({
             </span>
           ))}
         </div>
+        </article>
       </div>
     </div>
   );
@@ -349,7 +355,7 @@ export function ExperienceSection() {
 
       <div className="flex">
         {/* ── Left sticky panel ───────────────────────────────────────────── */}
-        <div className=" hidden sticky top-0 lg:flex h-screen w-[40%] shrink-0 flex-col justify-center overflow-hidden pl-14">
+        <div className=" hidden sticky top-0 lg:flex h-screen w-[40%] shrink-0 flex-col justify-center overflow-hidden pl-14 ">
           {/* Eyebrow */}
           <h2
             id="experience-heading"
@@ -401,10 +407,10 @@ export function ExperienceSection() {
         </div>
 
         {/* ── Right scrollable panel ───────────────────────────────────────── */}
-        <div className="min-h-screen flex-1 px-6 py-[10vh] md:py-[15vh] md:pl-0 md:pr-14">
+        <div className="min-h-screen flex-1 px-6 py-[10vh] md:py-[15vh] md:pl-0 md:pr-14 ">
 
           {/* Mobile-only section heading (left panel is lg:hidden) */}
-          <div className="mb-10 lg:hidden">
+          <div className="mb-10 lg:hidden ">
             <p className="font-body text-[0.8rem] font-bold uppercase tracking-[0.32em] text-brand-text-muted">
               Experience
             </p>
@@ -417,7 +423,7 @@ export function ExperienceSection() {
             </p>
           </div>
 
-          <div className="max-w-lg">
+          <div className="max-w-xxl ">
             {EXPERIENCES.map((exp, i) => (
               <ExperienceEntry
                 key={exp.id}

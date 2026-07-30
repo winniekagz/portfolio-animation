@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { Globe, Mail } from "lucide-react";
-import { GitHubIcon, LinkedInIcon } from "@/components/atoms/SocialIcons";
+import { GitHubIcon, LinkedInIcon } from "@/components/atoms";
 
 // ─── copy ────────────────────────────────────────────────────────────────────
 const HEADLINE = "I own product surfaces where frontend architecture, business constraints, and user experience meet.";

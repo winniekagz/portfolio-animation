@@ -1,5 +1,4 @@
-import { AboutSection } from "@/components/organisms/AboutSection";
-import { ExperienceSection } from "@/components/organisms/ExperienceSection";
+import { AboutSection, ExperienceSection } from "@/components/organisms";
 
 export default function AboutPage() {
   return (

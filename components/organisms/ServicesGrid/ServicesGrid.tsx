@@ -5,8 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { prefersReducedMotion } from "@/lib/gsap";
 import { services } from "@/lib/data/services";
-import { SectionTitle } from "@/components/molecules/SectionTitle";
-import { ServiceCard } from "@/components/molecules/ServiceCard";
+import { SectionTitle, ServiceCard } from "@/components/molecules";
 
 export function ServicesGrid() {
   const sectionRef = useRef<HTMLElement>(null);

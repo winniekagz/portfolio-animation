@@ -1,6 +1,4 @@
-import { Button } from "@/components/atoms/Button";
-import { Heading } from "@/components/atoms/Heading";
-import { Text } from "@/components/atoms/Text";
+import { Button, Heading, Text } from "@/components/atoms";
 
 export function HeroContent() {
   return (

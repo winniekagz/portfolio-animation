@@ -5,10 +5,12 @@ import { CursorProvider } from "@/contexts/CursorContext";
 import { MenuProvider } from "@/contexts/MenuContext";
 import { PageStackProvider } from "@/components/providers/PageStackProvider";
 import { LenisProvider } from "@/components/providers/LenisProvider";
-import { Navbar } from "@/components/organisms/Navbar";
-import { AnimatedMenu } from "@/components/organisms/AnimatedMenu";
-import { CustomCursor } from "@/components/organisms/CustomCursor";
-import { SiteFooter } from "@/components/organisms/SiteFooter";
+import {
+  AnimatedMenu,
+  CustomCursor,
+  Navbar,
+  SiteFooter,
+} from "@/components/organisms";
 
 
 const fontBody = localFont({

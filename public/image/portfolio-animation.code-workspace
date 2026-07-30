@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Downloads/# Offline-First Engineering Case Study (1)"
+		}
+	],
+	"settings": {
+		"conventionalCommits.scopes": [
+			"assets",
+			"ui"
+		]
+	}
+}

@@ -20,7 +20,7 @@ function MediumIcon({ className }: { className?: string }) {
   );
 }
 
-import { GitHubIcon, LinkedInIcon } from "@/components/atoms/SocialIcons";
+import { GitHubIcon, LinkedInIcon } from "@/components/atoms";
 
 function TwitterIcon({ className }: { className?: string }) {
   return (

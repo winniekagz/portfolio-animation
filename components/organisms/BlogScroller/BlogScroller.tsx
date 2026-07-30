@@ -2,9 +2,8 @@
 
 import type { BlogPost as BlogPostType, ContentBlock } from "@/lib/types";
 import { featuredPost } from "@/lib/data/blog";
-import { Heading } from "@/components/atoms/Heading";
-import { Text } from "@/components/atoms/Text";
-import { ScrollPanel } from "@/components/organisms/ScrollPanel";
+import { Heading, Text } from "@/components/atoms";
+import { ScrollPanel } from "../ScrollPanel";
 
 function BlockContent({ block }: { block: ContentBlock }) {
   const sharedContainerClass = "flex min-h-screen flex-col items-center justify-center px-8 py-20 text-center";
