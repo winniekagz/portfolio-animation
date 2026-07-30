@@ -289,7 +289,7 @@ function ExperienceEntry({
           {exp.stack.map((tech) => (
             <span
               key={tech}
-              className="exp-pill rounded-full border border-brand-text/12 bg-accent px-3 py-1 font-body text-xs uppercase tracking-wider text-black font-bold"
+              className="exp-pill rounded-full border border-brand-text/12 bg-accent/25 px-3 py-1 font-body text-xs uppercase tracking-wider text-accent font-bold"
               style={{ opacity: 0 }}
             >
               {tech}
