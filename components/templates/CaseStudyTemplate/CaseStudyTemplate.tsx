@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Boxes,
   CheckCircle2,
   ExternalLink,
   GitBranch,
@@ -9,7 +9,8 @@ import {
   Route,
   Sparkles,
 } from "lucide-react";
-import type { CaseStudy, Decision, NamedDescription, Workflow } from "@/lib/data/case-studies";
+import { TypewriterText } from "@/components/atoms/TypewriterText";
+import type { CaseStudy, CaseStudyEvidenceImage, Decision, NamedDescription, Workflow } from "@/lib/data/case-studies";
 
 function SectionShell({
   eyebrow,
@@ -22,24 +23,24 @@ function SectionShell({
 }>) {
   return (
     <section className="border-t border-brand-text/10 px-5 py-14 sm:px-8 md:px-12 lg:px-16 lg:py-20">
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.6fr]">
-        <div>
+      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+        <div className="max-w-4xl">
           {eyebrow ? (
-            <p className="font-body text-xs font-bold uppercase tracking-[0.22em] text-brand-accent">
+            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
               {eyebrow}
             </p>
           ) : null}
           <h2
             className="mt-3 font-display uppercase text-brand-text"
             style={{
-              fontSize: "clamp(2.5rem, 6vw, 6.5rem)",
+              fontSize: "clamp(3rem, 7vw, 7.5rem)",
               lineHeight: 0.95,
             }}
           >
             {title}
           </h2>
         </div>
-        <div>{children}</div>
+        <div className="max-w-5xl">{children}</div>
       </div>
     </section>
   );
@@ -55,9 +56,9 @@ function Pill({ children }: Readonly<{ children: React.ReactNode }>) {
 
 function TextCard({ item }: Readonly<{ item: NamedDescription }>) {
   return (
-    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-      <h3 className="font-body text-base font-bold text-brand-text">{item.title}</h3>
-      <p className="mt-3 font-body text-sm leading-relaxed text-brand-text-muted">
+    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
+      <h3 className="font-body text-xl font-bold text-brand-text">{item.title}</h3>
+      <p className="mt-3 font-body text-base leading-relaxed text-brand-text-muted md:text-lg">
         {item.description}
       </p>
     </article>
@@ -72,14 +73,14 @@ function DecisionCard({
   index: number;
 }>) {
   return (
-    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-      <p className="font-body text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">
+    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
+      <p className="font-body text-sm font-bold uppercase tracking-[0.18em] text-brand-accent">
         Decision {index + 1}
       </p>
-      <h3 className="mt-3 font-body text-lg font-bold text-brand-text">
+      <h3 className="mt-3 font-body text-2xl font-bold text-brand-text">
         {decision.title}
       </h3>
-      <dl className="mt-5 grid gap-4 font-body text-sm leading-relaxed">
+      <dl className="mt-5 grid gap-5 font-body text-base leading-relaxed md:text-lg">
         <div>
           <dt className="font-bold text-brand-text">Reason</dt>
           <dd className="mt-1 text-brand-text-muted">{decision.reason}</dd>
@@ -99,12 +100,12 @@ function DecisionCard({
 
 function WorkflowCard({ workflow }: Readonly<{ workflow: Workflow }>) {
   return (
-    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-      <h3 className="font-body text-lg font-bold text-brand-text">{workflow.title}</h3>
-      <ol className="mt-5 grid gap-3">
+    <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
+      <h3 className="font-body text-2xl font-bold text-brand-text">{workflow.title}</h3>
+      <ol className="mt-5 grid gap-4">
         {workflow.steps.map((step, index) => (
-          <li key={step} className="flex gap-3 font-body text-sm text-brand-text-muted">
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-accent/15 text-xs font-bold text-brand-accent">
+          <li key={step} className="flex gap-3 font-body text-base leading-relaxed text-brand-text-muted md:text-lg">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-accent/15 text-sm font-bold text-brand-accent">
               {index + 1}
             </span>
             <span className="pt-0.5">{step}</span>
@@ -117,14 +118,84 @@ function WorkflowCard({ workflow }: Readonly<{ workflow: Workflow }>) {
 
 function BulletList({ items }: Readonly<{ items: string[] }>) {
   return (
-    <ul className="grid gap-3">
+    <ul className="grid gap-4">
       {items.map((item) => (
-        <li key={item} className="flex gap-3 font-body text-sm leading-relaxed text-brand-text-muted">
-          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-accent" aria-hidden="true" />
+        <li key={item} className="flex gap-4 font-body text-base leading-relaxed text-brand-text-muted md:text-lg">
+          <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-brand-accent" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
     </ul>
+  );
+}
+
+function EvidenceImage({
+  image,
+  featured = false,
+}: Readonly<{
+  image: CaseStudyEvidenceImage;
+  featured?: boolean;
+}>) {
+  return (
+    <figure className={featured ? "md:col-span-2" : undefined}>
+      <div className="overflow-hidden rounded-lg border border-brand-text/10 bg-brand-text/[0.04] p-1">
+        <div className="relative aspect-video overflow-hidden rounded-md bg-brand-bg">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            priority={image.priority}
+            sizes={featured ? "(min-width: 1024px) 960px, 100vw" : "(min-width: 768px) 480px, 100vw"}
+            className="object-cover object-top"
+          />
+        </div>
+      </div>
+      <figcaption className="mt-5 max-w-3xl">
+        <h3 className="font-body text-xl font-bold text-brand-text">{image.title}</h3>
+        <p className="mt-2 font-body text-base leading-relaxed text-brand-text-muted">
+          {image.description}
+        </p>
+      </figcaption>
+    </figure>
+  );
+}
+
+function EvidenceSection({
+  evidence,
+}: Readonly<{
+  evidence: NonNullable<CaseStudy["evidence"]>;
+}>) {
+  return (
+    <section className="border-t border-brand-text/10 px-4 py-14 sm:px-6 md:px-8 lg:px-10 lg:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="max-w-4xl">
+          <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
+            {evidence.eyebrow}
+          </p>
+          <h2
+            className="mt-3 font-display uppercase text-brand-text"
+            style={{
+              fontSize: "clamp(3rem, 7vw, 7rem)",
+              lineHeight: 0.95,
+            }}
+          >
+            {evidence.title}
+          </h2>
+          <p className="mt-5 font-body text-lg leading-relaxed text-brand-text-muted md:text-xl">
+            {evidence.description}
+          </p>
+        </div>
+        <div className="mt-10 grid gap-10 md:grid-cols-2">
+          {evidence.images.map((image, index) => (
+            <EvidenceImage
+              key={image.src}
+              image={image}
+              featured={index === 0}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -135,6 +206,8 @@ function CtaLinks({ links }: Readonly<{ links: CaseStudy["links"] }>) {
         <a
           key={link.label}
           href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-brand-text/20 px-5 py-3 font-body text-sm font-bold text-brand-text transition hover:border-brand-accent hover:bg-brand-accent hover:text-brand-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
         >
           {link.label}
@@ -169,7 +242,7 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
                   lineHeight: 0.85,
                 }}
               >
-                {study.title}
+                <TypewriterText text={study.title} speedMs={75} />
               </h1>
               <p className="mt-6 max-w-3xl font-body text-lg leading-relaxed text-brand-text-muted md:text-xl">
                 {study.description}
@@ -197,7 +270,7 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
       </SectionShell>
 
       <SectionShell eyebrow="Engineering Goal" title="What The System Needed To Prove">
-        <p className="max-w-2xl font-body text-xl leading-relaxed text-brand-text">
+        <p className="max-w-4xl font-body text-2xl leading-relaxed text-brand-text md:text-3xl">
           {study.productGoal}
         </p>
       </SectionShell>
@@ -211,24 +284,16 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
       </SectionShell>
 
       <SectionShell eyebrow="System" title="System Shape">
-        <div className="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <div className="grid gap-3">
-            {study.systemParts.slice(0, 3).map((part) => (
-              <TextCard key={part.title} item={part} />
-            ))}
-          </div>
-          <div className="flex justify-center py-2">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-brand-accent/40 bg-brand-accent/15">
-              <Boxes className="h-7 w-7 text-brand-accent" aria-hidden="true" />
-            </div>
-          </div>
-          <TextCard item={study.systemParts[3]} />
+        <div className="grid gap-4 md:grid-cols-2">
+          {study.systemParts.map((part) => (
+            <TextCard key={part.title} item={part} />
+          ))}
         </div>
       </SectionShell>
 
       <SectionShell eyebrow="Architecture" title="Monorepo Shape">
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-          <pre className="overflow-x-auto rounded-lg border border-brand-text/10 bg-black/25 p-5 font-mono text-sm leading-relaxed text-brand-text">
+          <pre className="overflow-x-auto rounded-lg border border-brand-text/10 bg-black/25 p-5 font-mono text-base leading-relaxed text-brand-text">
             <code>{study.architectureTree}</code>
           </pre>
           <BulletList items={study.architectureNotes} />
@@ -255,23 +320,25 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
         <BulletList items={study.designSystem} />
       </SectionShell>
 
+      {study.evidence ? <EvidenceSection evidence={study.evidence} /> : null}
+
       <SectionShell eyebrow="Scope" title="V1 Scope Control">
         <div className="grid gap-4 md:grid-cols-2">
-          <article className="rounded-lg border border-brand-accent/25 bg-brand-accent/10 p-5">
-            <h3 className="flex items-center gap-2 font-body text-lg font-bold text-brand-text">
-              <Layers3 className="h-5 w-5 text-brand-accent" aria-hidden="true" />
+          <article className="rounded-lg border border-brand-accent/25 bg-brand-accent/10 p-6">
+            <h3 className="flex items-center gap-3 font-body text-2xl font-bold text-brand-text">
+              <Layers3 className="h-6 w-6 text-brand-accent" aria-hidden="true" />
               Included in V1
             </h3>
             <div className="mt-5">
               <BulletList items={study.scope.included} />
             </div>
           </article>
-          <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-            <h3 className="flex items-center gap-2 font-body text-lg font-bold text-brand-text">
-              <Route className="h-5 w-5 text-brand-accent" aria-hidden="true" />
+          <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
+            <h3 className="flex items-center gap-3 font-body text-2xl font-bold text-brand-text">
+              <Route className="h-6 w-6 text-brand-accent" aria-hidden="true" />
               Intentionally deferred
             </h3>
-            <p className="mt-3 font-body text-sm leading-relaxed text-brand-text-muted">
+            <p className="mt-3 font-body text-base leading-relaxed text-brand-text-muted md:text-lg">
               These were kept out of V1 to protect learning speed and reduce integration risk.
             </p>
             <div className="mt-5">
@@ -284,9 +351,9 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
       <SectionShell eyebrow="Roadmap" title="From Support To Automation">
         <div className="grid gap-4 md:grid-cols-2">
           {study.roadmap.map((phase) => (
-            <article key={phase.title} className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-              <h3 className="flex items-center gap-2 font-body text-lg font-bold text-brand-text">
-                <GitBranch className="h-5 w-5 text-brand-accent" aria-hidden="true" />
+            <article key={phase.title} className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
+              <h3 className="flex items-center gap-3 font-body text-2xl font-bold text-brand-text">
+                <GitBranch className="h-6 w-6 text-brand-accent" aria-hidden="true" />
                 {phase.title}
               </h3>
               <div className="mt-5">
@@ -302,9 +369,9 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
       </SectionShell>
 
       <SectionShell eyebrow="Reflection" title="What I Learned">
-        <div className="grid gap-3">
+        <div className="grid max-w-4xl gap-5">
           {study.reflection.map((item) => (
-            <p key={item} className="font-body text-base leading-relaxed text-brand-text-muted">
+            <p key={item} className="font-body text-lg leading-relaxed text-brand-text-muted md:text-xl">
               {item}
             </p>
           ))}

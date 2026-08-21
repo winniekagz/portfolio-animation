@@ -17,6 +17,14 @@ const CONTACT_ITEMS = [
     display: "winniekagendo35@gmail.com",
   },
   {
+    id: "alt-email",
+    icon: Mail,
+    label: "Alt Email",
+    value: "hello@winfredkagendo.com",
+    href: "mailto:hello@winfredkagendo.com",
+    display: "hello@winfredkagendo.com",
+  },
+  {
     id: "phone",
     icon: Phone,
     label: "Phone",

@@ -99,7 +99,7 @@ function Section({
       id={id}
       className="border-b border-brand-text/12 px-5 py-14 sm:px-8 md:px-10 lg:px-14 lg:py-20"
     >
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.72fr_1.28fr]">
         <div>
           <Tag>{eyebrow}</Tag>
           <h2
@@ -220,7 +220,7 @@ export function OfflineFirstCaseStudy() {
   );
 
   return (
-    <article className="bg-brand-bg text-brand-text">
+    <article className="bg-brand-bg text-brand-text ">
       <header className="border-b border-brand-text/12 px-5 py-14 sm:px-8 md:px-10 lg:px-14 lg:py-20">
         <div className="mx-auto max-w-6xl">
           <Link
@@ -436,8 +436,8 @@ export function OfflineFirstCaseStudy() {
         </p>
       </Section>
 
-      <Section id="principles" eyebrow="Engineering principles" title="What Notion teaches">
-        <div className="grid gap-4 md:grid-cols-2">
+      <Section id="principles" eyebrow="Engineering principles" title="What Notion teaches " >
+        <div className="grid gap-4 md:grid-cols-2  w-full">
           {principles.map((principle) => (
             <article key={principle.title} className="rounded-lg border border-brand-text/14 bg-brand-surface p-5">
               <h3 className="font-body text-base font-bold text-brand-text">{principle.title}</h3>

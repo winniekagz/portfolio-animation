@@ -10,9 +10,7 @@ type ProjectPageProps = {
 };
 
 export function generateStaticParams() {
-  return caseStudies
-    .filter((study) => study.slug !== "componentiq")
-    .map((study) => ({ slug: study.slug }));
+  return caseStudies.map((study) => ({ slug: study.slug }));
 }
 
 export async function generateMetadata({

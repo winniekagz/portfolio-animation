@@ -25,6 +25,14 @@ export type RoadmapPhase = {
   items: string[];
 };
 
+export type CaseStudyEvidenceImage = {
+  title: string;
+  description: string;
+  src: string;
+  alt: string;
+  priority?: boolean;
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -41,6 +49,12 @@ export type CaseStudy = {
   decisions: Decision[];
   workflows: Workflow[];
   designSystem: string[];
+  evidence?: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    images: CaseStudyEvidenceImage[];
+  };
   scope: {
     included: string[];
     excluded: string[];
@@ -51,213 +65,246 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
-  // {
-  //   slug: "componentiq",
-  //   title: "ComponentIQ",
-  //   subtitle: "In-Progress AI-Assisted Design System Platform",
-  //   description:
-  //     "An in-progress frontend architecture case study for a monorepo-based platform combining docs, Storybook, and AI-assisted workflows. The current work focuses on product direction, system shape, guardrails, and implementation planning rather than a completed production launch.",
-  //   tags: [
-  //     "React / Next.js",
-  //     "TypeScript",
-  //     "Monorepo",
-  //     "Design Systems",
-  //     "Storybook",
-  //     "AI Workflows",
-  //     "Frontend Architecture",
-  //   ],
-  //   links: [
-  //     { label: "Architecture Notes", href: "#" },
-  //     { label: "Planned Docs App", href: "#" },
-  //     { label: "Planned AI Assistant", href: "#" },
-  //     { label: "Planned Storybook", href: "#" },
-  //   ],
-  //   problem: [
-  //     "Engineers often do not know which component or pattern to use.",
-  //     "Teams rebuild UI that already exists.",
-  //     "Design-system documentation is often passive.",
-  //     "PR reviews catch UI, accessibility, and token issues too late.",
-  //     "New engineers need faster onboarding into component rules.",
-  //     "Frontend decisions are often undocumented or repeated across PRs.",
-  //   ],
-  //   productGoal:
-  //     "ComponentIQ is being designed to help frontend teams choose reusable components, follow accessibility and design-token guardrails, and review UI decisions before opening a PR.",
-  //   users: [
-  //     {
-  //       title: "Frontend engineers",
-  //       description:
-  //         "Need to know which component to use and how to use it correctly.",
-  //     },
-  //     {
-  //       title: "New team members",
-  //       description: "Need fast onboarding into the design system.",
-  //     },
-  //     {
-  //       title: "Reviewers / tech leads",
-  //       description:
-  //         "Need earlier visibility into UI, accessibility, and token issues.",
-  //     },
-  //   ],
-  //   systemParts: [
-  //     {
-  //       title: "Docs App",
-  //       description:
-  //         "Planned source of truth for components, usage rules, guardrails, and implementation guidance.",
-  //     },
-  //     {
-  //       title: "AI Assistant App",
-  //       description:
-  //         "Planned decision-support layer for recommendations, setup guidance, and pre-PR audit simulation.",
-  //     },
-  //     {
-  //       title: "Storybook",
-  //       description: "Visual component documentation and testing surface.",
-  //     },
-  //     {
-  //       title: "Shared packages",
-  //       description:
-  //         "UI components, design tokens, guardrail rules, shared types, and config.",
-  //     },
-  //   ],
-  //   architectureTree: `componentiq/
-  // apps/
-  //   docs-app/
-  //   ai-assistant-app/
-  //   storybook/
-  // packages/
-  //   ui/
-  //   tokens/
-  //   guardrails/
-  //   shared-types/
-  //   config/`,
-  //   architectureNotes: [
-  //     "Separation of concerns between documentation, AI workflows, and visual component testing.",
-  //     "Shared packages keep design tokens, components, and guardrails consistent.",
-  //     "The AI app can evolve independently without making the docs app unstable.",
-  //     "Storybook remains scoped to visual component development and QA in the proposed architecture.",
-  //   ],
-  //   decisions: [
-  //     {
-  //       title: "Separate Docs App, AI App, and Storybook",
-  //       reason: "Each proposed surface serves a different user need.",
-  //       tradeoff: "More apps and deployment surfaces.",
-  //       outcome:
-  //         "Clearer planned UX, easier evolution, and better separation of concerns.",
-  //     },
-  //     {
-  //       title: "Use a monorepo",
-  //       reason: "The planned apps need to share components, tokens, rules, and types.",
-  //       tradeoff: "Requires stronger project structure and tooling.",
-  //       outcome: "A clearer path toward less duplication and better consistency across surfaces.",
-  //     },
-  //     {
-  //       title: "Treat AI as decision support, not source of truth",
-  //       reason:
-  //         "Design-system rules should remain documented and reviewable.",
-  //       tradeoff: "AI needs guardrails and constrained workflows.",
-  //       outcome: "Safer AI recommendations grounded in documented rules.",
-  //     },
-  //     {
-  //       title: "Start with PR review simulation before GitHub automation",
-  //       reason:
-  //         "Validate rules, UX, and structured output before integrating into real PRs.",
-  //       tradeoff: "V1 is not fully automated.",
-  //       outcome: "Faster MVP with lower risk and clearer learning.",
-  //     },
-  //   ],
-  //   workflows: [
-  //     {
-  //       title: "Component Recommendation",
-  //       steps: [
-  //         "User describes UI task",
-  //         "AI recommends component or pattern",
-  //         "AI explains tradeoffs",
-  //         "User follows linked docs",
-  //       ],
-  //     },
-  //     {
-  //       title: "Setup Guidance",
-  //       steps: [
-  //         "User selects stack and options",
-  //         "AI generates setup steps",
-  //         "User copies implementation guidance",
-  //       ],
-  //     },
-  //     {
-  //       title: "Pre-PR Audit Simulation",
-  //       steps: [
-  //         "User pastes UI plan or code snippet",
-  //         "AI checks against guardrails",
-  //         "AI returns structured review comments",
-  //       ],
-  //     },
-  //   ],
-  //   designSystem: [
-  //     "Components are planned to be documented in the Docs App and visually tested in Storybook.",
-  //     "Guardrails cover component usage, accessibility, design-token usage, and AI safety.",
-  //     "Storybook is scoped to prove actual UI components and variants as the platform matures.",
-  //     "Docs explain when and why to use components.",
-  //   ],
-  //   scope: {
-  //     included: [
-  //       "Docs App",
-  //       "AI Assistant App",
-  //       "Storybook",
-  //       "shared UI package",
-  //       "design tokens",
-  //       "guardrail rules",
-  //       "5-6 documented components",
-  //       "component recommendation flow",
-  //       "setup guidance",
-  //       "pre-PR audit simulator",
-  //     ],
-  //     excluded: [
-  //       "real GitHub PR comments",
-  //       "full RAG over docs",
-  //       "user accounts",
-  //       "analytics dashboard",
-  //       "SDUI renderer",
-  //       "advanced governance workflows",
-  //     ],
-  //   },
-  //   roadmap: [
-  //     {
-  //       title: "V1 Decision Support",
-  //       items: [
-  //         "Constrained recommendations",
-  //         "Setup guidance",
-  //         "Pre-PR audit simulation",
-  //         "Documented guardrails",
-  //       ],
-  //     },
-  //     {
-  //       title: "V2 Workflow Automation",
-  //       items: [
-  //         "RAG over docs and guardrails",
-  //         "GitHub Actions integration",
-  //         "structured AI PR comments",
-  //         "rule citations in AI responses",
-  //         "decision history",
-  //         "component adoption metrics",
-  //         "token usage audit",
-  //         "optional Figma/design handoff integration",
-  //       ],
-  //     },
-  //   ],
-  //   impact: [
-  //     "Clarifies the product and architecture direction before deeper implementation work.",
-  //     "Shows how duplicated UI could be reduced by guiding engineers toward existing components.",
-  //     "Defines an onboarding model that would centralize docs, setup guidance, and guardrails.",
-  //     "Frames how accessibility, token, and component-choice issues could be surfaced earlier than PR review.",
-  //     "Creates a technical communication artifact that explains the decisions behind the platform.",
-  //   ],
-  //   reflection: [
-  //     "AI-assisted developer tools work best when they narrow the decision space instead of pretending to replace engineering judgment.",
-  //     "Constrained workflows create better outputs than a generic chatbot because the system can ask for the right inputs and return reviewable structure.",
-  //     "Separating docs, AI, and Storybook makes the proposed platform easier to reason about because each surface has one primary job.",
-  //     "Next, I would strengthen retrieval, add citations to every recommendation, and connect the audit simulator to real PR workflows.",
-  //   ],
-  // },
+  {
+    slug: "componentiq",
+    title: "ComponentIQ",
+    subtitle: "Token-First Design System — Audit Layer Planned",
+    description:
+      "A frontend architecture case study for ComponentIQ: why the plan started as a docs-and-AI-assistant monorepo, why the shipped v1 became a token-first design system and component library instead, and what a future automated audit layer still needs from that foundation.",
+    tags: [
+      "React / Next.js",
+      "TypeScript",
+      "Design Systems",
+      "Design Tokens",
+      "Storybook",
+      "Component Libraries",
+      "Frontend Architecture",
+    ],
+    links: [
+      { label: "Live Deployment", href: "https://ai-assisted-design-system-ai-featur.vercel.app/" },
+      { label: "Storybook", href: "https://ai-assisted-design-system.vercel.app/" },
+      { label: "npm Package", href: "https://www.npmjs.com/package/componentiq" },
+      { label: "GitHub", href: "https://github.com/winniekagz/ai-assisted-design-system/" },
+      { label: "Product Page", href: "/componentiq" },
+    ],
+    problem: [
+      "Engineers often do not know which component or pattern to use.",
+      "Teams rebuild UI that already exists.",
+      "Design-system documentation is often passive.",
+      "PR reviews catch UI, accessibility, and token issues too late.",
+      "New engineers need faster onboarding into component rules.",
+      "Frontend decisions are often undocumented or repeated across PRs.",
+    ],
+    productGoal:
+      "ComponentIQ is being designed to help frontend teams choose reusable components, follow accessibility and design-token guardrails, and review UI decisions before opening a PR.",
+    users: [
+      {
+        title: "Frontend engineers",
+        description:
+          "Need to know which component to use and how to use it correctly.",
+      },
+      {
+        title: "New team members",
+        description: "Need fast onboarding into the design system.",
+      },
+      {
+        title: "Reviewers / tech leads",
+        description:
+          "Need earlier visibility into UI, accessibility, and token issues.",
+      },
+    ],
+    systemParts: [
+      {
+        title: "Docs App",
+        description:
+          "Originally planned as the source of truth for components, usage rules, guardrails, and implementation guidance. Superseded by Storybook doubling as docs in the shipped v1.",
+      },
+      {
+        title: "AI Assistant App",
+        description:
+          "Planned decision-support layer for recommendations, setup guidance, and pre-PR audit simulation. Not built yet.",
+      },
+      {
+        title: "Storybook",
+        description: "Visual component documentation and testing surface. Shipped, hosted, and live.",
+      },
+      {
+        title: "Deployment",
+        description:
+          "Live hosted product surface for the implemented ComponentIQ experience, including project setup, token guidance, and component evidence.",
+      },
+      {
+        title: "Shared packages",
+        description:
+          "UI components and design tokens, shipped as the componentiq npm package. Guardrail rules and shared types remain planned.",
+      },
+    ],
+    architectureTree: `componentiq/
+  apps/
+    docs-app/          (superseded by Storybook)
+    ai-assistant-app/  (planned)
+    storybook/          (shipped)
+  packages/
+    ui/                 (shipped — componentiq on npm)
+    tokens/             (shipped — 3-layer contract)
+    guardrails/         (planned)
+    shared-types/       (planned)
+    config/             (planned)`,
+    architectureNotes: [
+      "Separation of concerns between documentation, AI workflows, and visual component testing.",
+      "Shared packages keep design tokens, components, and guardrails consistent.",
+      "The AI app can evolve independently without making the docs app unstable.",
+      "Storybook ended up covering both visual QA and documentation, so a separate docs app was never built for v1.",
+    ],
+    decisions: [
+      {
+        title: "Separate Docs App, AI App, and Storybook",
+        reason: "Each proposed surface serves a different user need.",
+        tradeoff: "More apps and deployment surfaces.",
+        outcome:
+          "Storybook absorbed the docs role for v1, so this separation was simplified rather than built as originally planned.",
+      },
+      {
+        title: "Use a monorepo",
+        reason: "The planned apps need to share components, tokens, rules, and types.",
+        tradeoff: "Requires stronger project structure and tooling.",
+        outcome: "A clearer path toward less duplication and better consistency across surfaces.",
+      },
+      {
+        title: "Treat AI as decision support, not source of truth",
+        reason:
+          "Design-system rules should remain documented and reviewable.",
+        tradeoff: "AI needs guardrails and constrained workflows.",
+        outcome: "Safer AI recommendations grounded in documented rules.",
+      },
+      {
+        title: "Start with PR review simulation before GitHub automation",
+        reason:
+          "Validate rules, UX, and structured output before integrating into real PRs.",
+        tradeoff: "V1 is not fully automated.",
+        outcome: "Faster MVP with lower risk and clearer learning.",
+      },
+    ],
+    workflows: [
+      {
+        title: "Component Recommendation",
+        steps: [
+          "User describes UI task",
+          "AI recommends component or pattern",
+          "AI explains tradeoffs",
+          "User follows linked docs",
+        ],
+      },
+      {
+        title: "Setup Guidance",
+        steps: [
+          "User selects stack and options",
+          "AI generates setup steps",
+          "User copies implementation guidance",
+        ],
+      },
+      {
+        title: "Pre-PR Audit Simulation",
+        steps: [
+          "User pastes UI plan or code snippet",
+          "AI checks against guardrails",
+          "AI returns structured review comments",
+        ],
+      },
+    ],
+    designSystem: [
+      "Components are documented and visually tested in Storybook — the Docs App role was absorbed into it rather than built separately.",
+      "The implemented ComponentIQ product surface is deployed publicly and linked from this case study as the live deployment.",
+      "Guardrails cover component usage, accessibility, design-token usage, and AI safety in the plan; only the token and component guardrails are enforced today.",
+      "Storybook proves actual UI components and variants, including DashboardLayout and an Enhanced Data Table.",
+      "Docs explain when and why to use components, and how to override tokens through ComponentIqProvider.",
+    ],
+    evidence: {
+      eyebrow: "Product Evidence",
+      title: "What Shipped",
+      description:
+        "The visuals should behave like receipts: first show the product surface teams would work in, then prove the system underneath it with Storybook documentation and token architecture.",
+      images: [
+        {
+          title: "Project Audit Console",
+          description:
+            "Lead with the dashboard because it communicates the product promise immediately: project health, audit state, design-system status, and actions in one operational surface.",
+          src: "/image/componentIQ/projects-dashboard.png",
+          alt: "ComponentIQ projects dashboard showing project health, audit status, design system status, filters, and table actions",
+          priority: true,
+        },
+        {
+          title: "Setup Guide",
+          description:
+            "Use the onboarding screenshot to show that the library is installable and teachable, not just a collection of components.",
+          src: "/image/componentIQ/storybook-configure-project.png",
+          alt: "ComponentIQ Storybook setup guide showing install, connect tokens, and build with components cards",
+        },
+        {
+          title: "Token Contract",
+          description:
+            "Close with the token documentation because it supports the brand claim: ComponentIQ starts with a versioned design contract.",
+          src: "/image/componentIQ/storybook-design-tokens.png",
+          alt: "ComponentIQ Storybook design tokens documentation showing provider architecture, three layers, and token usage code",
+        },
+      ],
+    },
+    scope: {
+      included: [
+        "Storybook (shipped)",
+        "live ComponentIQ deployment (shipped)",
+        "shared UI package (shipped, componentiq on npm)",
+        "design tokens (shipped, 3-layer contract)",
+        "component recommendation flow (planned)",
+        "setup guidance (planned)",
+        "pre-PR audit simulator (planned)",
+      ],
+      excluded: [
+        "Docs App as a separate surface",
+        "real GitHub PR comments",
+        "full RAG over docs",
+        "user accounts",
+        "analytics dashboard",
+        "SDUI renderer",
+        "advanced governance workflows",
+      ],
+    },
+    roadmap: [
+      {
+        title: "V1 Shipped",
+        items: [
+          "Token contract, default values, and CSS-variable mapping",
+          "ComponentIqProvider runtime theming",
+          "Component library (forms, feedback, navigation, DashboardLayout, Enhanced Data Table)",
+          "Storybook docs",
+          "npm package",
+        ],
+      },
+      {
+        title: "V2 Analysis & Automation",
+        items: [
+          "Scoped, read-only repository import",
+          "Configurable rulesets (accessibility, architecture, security)",
+          "Analysis engine, findings, and rule violations",
+          "GitHub Actions / CI integration",
+          "CLI",
+        ],
+      },
+    ],
+    impact: [
+      "Clarifies the product and architecture direction before deeper implementation work.",
+      "Shows how duplicated UI could be reduced by guiding engineers toward existing components.",
+      "Shipped a real, usable foundation — tokens, components, provider, Storybook, npm package — instead of stalling on the original multi-app plan.",
+      "Frames how accessibility, token, and component-choice issues could be surfaced earlier than PR review, once the analysis layer exists.",
+      "Creates a technical communication artifact that explains the decisions behind the platform, including where the plan changed.",
+    ],
+    reflection: [
+      "AI-assisted developer tools work best when they narrow the decision space instead of pretending to replace engineering judgment.",
+      "Constrained workflows create better outputs than a generic chatbot because the system can ask for the right inputs and return reviewable structure.",
+      "The original plan split docs, AI, and Storybook into separate apps; in practice, Storybook absorbed the docs role and the AI/audit layer turned out to depend entirely on the token and component layer being solid first — so that shipped first instead.",
+      "Next, I would build the analysis engine on top of the now-shipped token contract, add citations to every recommendation, and connect the audit simulator to real PR workflows.",
+    ],
+  },
   {
     slug: "offline-first-engineering",
     title: "Offline-First Engineering",

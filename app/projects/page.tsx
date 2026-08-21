@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/data/case-studies";
 
-const visibleCaseStudies = caseStudies.filter(
-  (study) => study.slug === "offline-first-engineering",
+const visibleCaseStudies = caseStudies.filter((study) =>
+  ["offline-first-engineering", "componentiq"].includes(study.slug),
 );
 
 export default function ProjectsPage() {

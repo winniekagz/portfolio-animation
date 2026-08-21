@@ -14,9 +14,10 @@ const EXPERIENCES = [
     company: "Supernomics",
     role: "Frontend & Mobile Engineer",
     period: "Jan 2026 – Present",
-    stack: ["React.js", "React Native", "Tailwind CSS", "Expo", "Monorepos"],
+    stack: ["React.js", "React Native", "Electron.js", "Tailwind CSS", "Expo", "Monorepos"],
     highlights: [
       "Contributed to monorepo-based AI product architecture, using shared package boundaries to keep web, mobile, and product workflows maintainable as the system expands.",
+      "Delivered an AI-powered legal application across web, Electron desktop, and Microsoft Office Add-in environments, maintaining cross-platform feature parity while prioritizing release speed, reliable API integrations, and a consistent user experience.",
       "Delivered a React Native and Expo mobile delivery decisions where cross-platform parity, release speed, and API integration quality mattered more than isolated screens.",
       "Owned a shared component library to reduce repeated UI implementation and make product surfaces easier for engineers to extend consistently.",
       "Translated Figma requirements into production web and mobile interfaces while clarifying API contracts and interaction edge cases before they reached implementation risk.",

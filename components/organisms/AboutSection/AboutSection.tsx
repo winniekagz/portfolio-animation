@@ -15,7 +15,7 @@ const SOCIAL = [
   { Icon: GitHubIcon,   label: "GitHub",   href: "https://github.com/winniekagz",                        external: true },
   { Icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/",   external: true },
   { Icon: Globe,        label: "Website",  href: "#",                                                     external: false },
-  { Icon: Mail,         label: "Email",    href: "mailto:winniekagendo35@gmail.com",                      external: false },
+  { Icon: Mail,         label: "Email",    href: "mailto:hello@winfredkagendo.com",                       external: false },
 ];
 
 
