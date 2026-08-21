@@ -31,11 +31,11 @@
   --color-brand-secondary: #3faf82;
   --color-brand-text-muted: rgba(243, 231, 238, 0.7);
   --color-brand-surface: #211619;
-  /* Font families: layout.tsx sets --font-dm-sans (body) and --font-bebas-neue (display) */
-  --font-display: var(--font-bebas-neue), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Font families: Space Grotesk carries headlines, body, nav, and case-study prose; IBM Plex Mono carries technical metadata. */
+  --font-display: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-body);
-  --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  --font-mono: var(--font-ibm-plex-mono), "IBM Plex Mono", "Space Mono", ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
   /* Spacing scale (8px base) */
   --spacing-1: 8px;
   --spacing-2: 16px;
@@ -49,21 +49,21 @@
   --spacing-20: 160px;
   --spacing-25: 200px;
   /* Type scale */
-  --font-size-display: clamp(2.25rem, 5vw + 1.5rem, 7.5rem);
-  --font-size-h1: clamp(1.875rem, 3vw + 1rem, 4.5rem);
-  --font-size-h2: clamp(1.25rem, 2vw + 0.5rem, 3rem);
-  --font-size-h3: clamp(1.125rem, 1.5vw + 0.5rem, 2rem);
-  --font-size-body: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --font-size-display: clamp(2.75rem, 5vw + 1rem, 5.5rem);
+  --font-size-h1: clamp(2.125rem, 3vw + 1rem, 4rem);
+  --font-size-h2: clamp(1.75rem, 2vw + 0.75rem, 3rem);
+  --font-size-h3: clamp(1.25rem, 1vw + 1rem, 1.75rem);
+  --font-size-body: clamp(1rem, 0.35vw + 0.95rem, 1.25rem);
   --font-size-small: 0.875rem;
-  --leading-display: 1.05;
+  --leading-display: 1;
   --leading-h1: 1.1;
   --leading-h2: 1.15;
   --leading-h3: 1.2;
   --leading-body: 1.6;
   --leading-small: 1.4;
-  --tracking-display: -0.02em;
-  --tracking-h1: -0.02em;
-  --tracking-h2: -0.01em;
+  --tracking-display: 0em;
+  --tracking-h1: 0em;
+  --tracking-h2: 0em;
   /* shadcn compatibility */
   --color-background: var(--background);
   --color-foreground: var(--foreground);

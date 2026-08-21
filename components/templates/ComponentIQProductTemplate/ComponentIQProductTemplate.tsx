@@ -33,7 +33,7 @@ function StatusBadge({ status }: Readonly<{ status: Status }>) {
   return (
     <span
       className={cn(
-        "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 font-body text-[0.7rem] font-bold uppercase tracking-[0.1em]",
+        "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[0.7rem] font-medium uppercase tracking-[0.08em]",
         isAvailable
           ? "border-brand-secondary/30 bg-brand-secondary/10 text-brand-secondary"
           : "border-brand-text/15 bg-brand-text/[0.04] text-brand-text-muted"
@@ -60,17 +60,17 @@ function ProductSection({
 }>) {
   return (
     <section id={id} className="scroll-mt-36 border-t border-brand-text/10 px-5 py-14 sm:px-8 md:px-12 lg:px-16 lg:py-20">
-      <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.8fr_1.6fr]">
-        <div>
-          <p className="font-body text-xs font-bold uppercase tracking-[0.22em] text-brand-accent">{eyebrow}</p>
+      <div className="mx-auto flex max-w-6xl flex-col gap-8">
+        <div className="max-w-4xl">
+          <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-accent">{eyebrow}</p>
           <h2
             className="mt-3 font-display text-brand-text"
-            style={{ fontSize: "var(--font-size-h2)", lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" }}
+            style={{ fontSize: "var(--font-size-h2)", fontWeight: 600, lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" }}
           >
             {title}
           </h2>
           {subtitle ? (
-            <p className="mt-4 font-body text-sm leading-relaxed text-brand-text-muted">{subtitle}</p>
+            <p className="mt-4 font-body text-lg leading-relaxed text-brand-text-muted">{subtitle}</p>
           ) : null}
         </div>
         <div>{children}</div>
@@ -82,8 +82,8 @@ function ProductSection({
 function ProblemCard({ item }: Readonly<{ item: (typeof problems)[number] }>) {
   return (
     <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-      <h3 className="font-body text-base font-bold text-brand-text">{item.label}</h3>
-      <p className="mt-3 font-body text-sm leading-relaxed text-brand-text-muted">{item.description}</p>
+      <h3 className="font-body text-xl font-semibold text-brand-text">{item.label}</h3>
+      <p className="mt-3 font-body text-base leading-relaxed text-brand-text-muted md:text-lg">{item.description}</p>
     </article>
   );
 }
@@ -104,8 +104,8 @@ function FlowList({ steps, variant }: Readonly<{ steps: FlowStep[]; variant: "to
               {index + 1}
             </span>
             <span className="pt-0.5">
-              <span className="block font-body text-sm font-bold text-brand-text">{step.title}</span>
-              <span className="mt-1 block font-body text-sm leading-relaxed text-brand-text-muted">{step.description}</span>
+              <span className="block font-body text-lg font-semibold text-brand-text">{step.title}</span>
+              <span className="mt-1 block font-body text-base leading-relaxed text-brand-text-muted">{step.description}</span>
             </span>
           </>
         );
@@ -144,10 +144,10 @@ function FeatureCard({ item }: Readonly<{ item: CapabilityItem }>) {
   const content = (
     <>
       <div className="flex items-start justify-between gap-3">
-        <h4 className="font-body text-sm font-bold text-brand-text">{item.label}</h4>
+        <h4 className="font-body text-lg font-semibold text-brand-text">{item.label}</h4>
         <StatusBadge status={item.status} />
       </div>
-      <p className="font-body text-sm leading-relaxed text-brand-text-muted">{item.description}</p>
+      <p className="font-body text-base leading-relaxed text-brand-text-muted">{item.description}</p>
     </>
   );
 
@@ -166,10 +166,10 @@ function DecisionCard({ decision }: Readonly<{ decision: Decision }>) {
   return (
     <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-body text-lg font-bold text-brand-text">{decision.title}</h3>
+        <h3 className="font-body text-2xl font-semibold text-brand-text">{decision.title}</h3>
         <StatusBadge status={decision.phase} />
       </div>
-      <dl className="mt-5 grid gap-4 font-body text-sm leading-relaxed">
+      <dl className="mt-5 grid gap-4 font-body text-base leading-relaxed md:text-lg">
         <div>
           <dt className="font-bold text-brand-text">Problem</dt>
           <dd className="mt-1 text-brand-text-muted">{decision.problem}</dd>
@@ -207,10 +207,10 @@ function ArchitectureList() {
             )}
           />
           <div className="flex flex-wrap items-center gap-3">
-            <span className="font-body text-base font-bold text-brand-text">{node.label}</span>
+            <span className="font-body text-lg font-semibold text-brand-text">{node.label}</span>
             <StatusBadge status={node.status} />
           </div>
-          <p className="mt-1 font-body text-sm text-brand-text-muted">{node.note}</p>
+          <p className="mt-1 font-body text-base text-brand-text-muted">{node.note}</p>
         </li>
       ))}
     </ol>
@@ -225,11 +225,11 @@ function DocCard({ item }: Readonly<{ item: DocCardData }>) {
       rel="noopener noreferrer"
       className="flex flex-col gap-2 rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5 transition-colors hover:border-brand-accent/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
     >
-      <span className="flex items-center justify-between gap-2 font-body text-sm font-bold text-brand-text">
+      <span className="flex items-center justify-between gap-2 font-body text-lg font-semibold text-brand-text">
         {item.title}
         <ExternalLink className="h-4 w-4 shrink-0 text-brand-text-muted" aria-hidden="true" />
       </span>
-      <span className="font-body text-sm leading-relaxed text-brand-text-muted">{item.description}</span>
+      <span className="font-body text-base leading-relaxed text-brand-text-muted">{item.description}</span>
     </a>
   );
 }
@@ -253,13 +253,13 @@ function EvidenceCard({ item }: Readonly<{ item: EvidenceItem }>) {
       ) : null}
       <span className="flex flex-col gap-2 p-5">
         <span className="flex items-center justify-between gap-2">
-          <span className="flex items-center gap-2 font-body text-sm font-bold text-brand-text">
+          <span className="flex items-center gap-2 font-body text-lg font-semibold text-brand-text">
             {item.title}
             <ExternalLink className="h-4 w-4 shrink-0 text-brand-text-muted" aria-hidden="true" />
           </span>
           <StatusBadge status={item.status} />
         </span>
-        <span className="font-body text-sm leading-relaxed text-brand-text-muted">{item.description}</span>
+        <span className="font-body text-base leading-relaxed text-brand-text-muted">{item.description}</span>
       </span>
     </a>
   );
@@ -276,7 +276,7 @@ function CtaLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center gap-2 rounded-full border px-5 py-3 font-body text-sm font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent",
+        "inline-flex items-center gap-2 rounded-full border px-5 py-3 font-mono text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent",
         variant === "primary"
           ? "border-brand-accent bg-brand-accent text-brand-bg hover:bg-brand-accent-hover hover:border-brand-accent-hover"
           : "border-brand-text/20 text-brand-text hover:border-brand-accent hover:bg-brand-accent hover:text-brand-bg"
@@ -293,7 +293,7 @@ function StatusPill({ label, status }: Readonly<{ label: string; status: Status 
     <li>
       <span
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-body text-xs font-bold uppercase tracking-[0.1em]",
+          "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.08em]",
           status === "available"
             ? "border-brand-secondary/30 bg-brand-secondary/10 text-brand-secondary"
             : "border-brand-text/15 bg-brand-text/[0.04] text-brand-text-muted"
@@ -311,10 +311,10 @@ export function ComponentIQProductTemplate() {
     <article className="bg-brand-bg text-brand-text">
       <header className="px-5 pb-10 pt-16 sm:px-8 md:px-12 lg:px-16 lg:pb-14 lg:pt-24">
         <div className="mx-auto max-w-6xl">
-          <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">{hero.eyebrow}</p>
+          <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-accent">{hero.eyebrow}</p>
           <h1
             className="mt-4 font-display text-brand-text"
-            style={{ fontSize: "var(--font-size-display)", lineHeight: "var(--leading-display)", letterSpacing: "var(--tracking-display)" }}
+            style={{ fontSize: "var(--font-size-display)", fontWeight: 600, lineHeight: "var(--leading-display)", letterSpacing: "var(--tracking-display)" }}
           >
             {hero.title}
           </h1>
@@ -364,8 +364,8 @@ export function ComponentIQProductTemplate() {
 
       <section className="border-t border-brand-text/10 px-5 py-14 sm:px-8 md:px-12 lg:px-16 lg:py-20">
         <div className="mx-auto max-w-6xl">
-          <p className="font-body text-xs font-bold uppercase tracking-[0.22em] text-brand-text-muted">Next: Import, Then Audit</p>
-          <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-brand-text-muted">
+          <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-text-muted">Next: Import, Then Audit</p>
+          <p className="mt-3 max-w-2xl font-body text-base leading-relaxed text-brand-text-muted md:text-lg">
             This workflow does not exist yet. It is the reason the configuration layer above was built first.
           </p>
           <div className="mt-6">
@@ -382,7 +382,7 @@ export function ComponentIQProductTemplate() {
         <div className="grid gap-10">
           {capabilities.map((group) => (
             <div key={group.title}>
-              <h3 className="font-body text-sm font-bold uppercase tracking-[0.14em] text-brand-text-muted">{group.title}</h3>
+              <h3 className="font-mono text-sm font-medium uppercase tracking-[0.12em] text-brand-text-muted">{group.title}</h3>
               <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {group.items.map((item) => (
                   <FeatureCard key={item.label} item={item} />
@@ -453,7 +453,7 @@ export function ComponentIQProductTemplate() {
             {["TypeScript-first", "React component library", "npm registry"].map((badge) => (
               <li
                 key={badge}
-                className="rounded-full border border-brand-text/15 bg-brand-text/[0.04] px-3 py-1.5 font-body text-xs font-bold uppercase tracking-[0.1em] text-brand-text-muted"
+                className="rounded-full border border-brand-text/15 bg-brand-text/[0.04] px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.08em] text-brand-text-muted"
               >
                 {badge}
               </li>
@@ -476,7 +476,7 @@ export function ComponentIQProductTemplate() {
       >
         <div className="grid gap-6 md:grid-cols-2">
           <div>
-            <h3 className="font-body text-sm font-bold uppercase tracking-[0.14em] text-brand-text-muted">Current</h3>
+            <h3 className="font-mono text-sm font-medium uppercase tracking-[0.12em] text-brand-text-muted">Current</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {currentStatus.current.map((label) => (
                 <StatusPill key={label} label={label} status="available" />
@@ -484,7 +484,7 @@ export function ComponentIQProductTemplate() {
             </ul>
           </div>
           <div>
-            <h3 className="font-body text-sm font-bold uppercase tracking-[0.14em] text-brand-text-muted">Next</h3>
+            <h3 className="font-mono text-sm font-medium uppercase tracking-[0.12em] text-brand-text-muted">Next</h3>
             <ul className="mt-4 flex flex-wrap gap-2">
               {currentStatus.next.map((label) => (
                 <StatusPill key={label} label={label} status="planned" />
@@ -497,8 +497,8 @@ export function ComponentIQProductTemplate() {
       <section className="border-t border-brand-text/10 px-5 py-16 sm:px-8 md:px-12 lg:px-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="font-body text-sm font-bold uppercase tracking-[0.18em] text-brand-accent">Get Started</p>
-            <h2 className="mt-2 font-display text-brand-text" style={{ fontSize: "var(--font-size-h2)", lineHeight: "var(--leading-h2)" }}>
+            <p className="font-mono text-sm font-medium uppercase tracking-[0.14em] text-brand-accent">Get Started</p>
+            <h2 className="mt-2 font-display text-brand-text" style={{ fontSize: "var(--font-size-h2)", fontWeight: 600, lineHeight: "var(--leading-h2)" }}>
               Explore ComponentIQ
             </h2>
           </div>
@@ -509,7 +509,7 @@ export function ComponentIQProductTemplate() {
             <CtaLink href={links.npm} label="View Package" />
             <Link
               href="/projects/componentiq"
-              className="font-body text-sm font-bold text-brand-text-muted underline decoration-brand-text/30 underline-offset-4 transition hover:text-brand-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+              className="font-mono text-sm font-medium text-brand-text-muted underline decoration-brand-text/30 underline-offset-4 transition hover:text-brand-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
             >
               Read the build story
             </Link>

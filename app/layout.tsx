@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { CursorProvider } from "@/contexts/CursorContext";
 import { MenuProvider } from "@/contexts/MenuContext";
@@ -12,27 +12,19 @@ import {
   SiteFooter,
 } from "@/components/organisms";
 
-
-const fontBody = localFont({
-  src: [
-    { path: "../public/fonts/goodpro/FFGoodPro-Regular.woff2", weight: "400" },
-    { path: "../public/fonts/goodpro/FFGoodPro-Medium.woff2", weight: "500" },
-    { path: "../public/fonts/goodpro/FFGoodPro-Bold.woff2", weight: "700" },
-  ],
-  variable: "--font-dm-sans",
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
   display: "swap",
-  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
 
-/**
- * Good Pro Condensed / XCond (display / headlines). Next.js optimizes and self-hosts.
- * Files: public/fonts/goodprocondensed/ (from your Good Pro Condensed package).
- */
-const fontDisplay = localFont({
-  src: [{ path: "../public/fonts/goodprocondensed/FFGoodProXCond-Regular.woff2", weight: "400" }],
-  variable: "--font-bebas-neue",
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-ibm-plex-mono",
   display: "swap",
-  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -48,9 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${fontBody.variable} ${fontDisplay.variable} antialiased bg-background text-foreground`}
-      >
+      <body className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} antialiased bg-background text-foreground`}>
         <LenisProvider>
         <CursorProvider>
           <MenuProvider>

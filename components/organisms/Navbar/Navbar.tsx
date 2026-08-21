@@ -75,7 +75,7 @@ export function Navbar() {
           href="#hero"
           onClick={(e) => scrollTo(e, "#hero")}
           className="flex items-center gap-3 font-display text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          style={{ fontSize: "var(--font-size-h3)", lineHeight: "var(--leading-h3)" }}
+          style={{ fontSize: "1.125rem", fontWeight: 500, lineHeight: "var(--leading-h3)" }}
         >
           <Image
             src="/image/win.jpeg"
@@ -98,7 +98,7 @@ export function Navbar() {
                   onClick={(e) => scrollTo(e, item.href)}
                   className={cn(
                     "group relative block overflow-hidden leading-none",
-                    "font-body text-sm uppercase tracking-widest",
+                    "font-mono text-sm font-medium uppercase tracking-[0.08em]",
                     "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     isActive ? "text-brand-accent" : "text-foreground/60"
                   )}

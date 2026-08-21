@@ -26,15 +26,16 @@ function SectionShell({
       <div className="mx-auto flex max-w-6xl flex-col gap-8">
         <div className="max-w-4xl">
           {eyebrow ? (
-            <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
+            <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-accent">
               {eyebrow}
             </p>
           ) : null}
           <h2
             className="mt-3 font-display uppercase text-brand-text"
             style={{
-              fontSize: "clamp(3rem, 7vw, 7.5rem)",
-              lineHeight: 0.95,
+              fontSize: "clamp(2.125rem, 4vw, 3rem)",
+              fontWeight: 600,
+              lineHeight: 1.08,
             }}
           >
             {title}
@@ -48,7 +49,7 @@ function SectionShell({
 
 function Pill({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <span className="rounded-full border border-brand-text/15 bg-brand-text/[0.04] px-3 py-1.5 font-body text-xs font-bold uppercase tracking-[0.12em] text-brand-text-muted">
+    <span className="rounded-full border border-brand-text/15 bg-brand-text/[0.04] px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.08em] text-brand-text-muted">
       {children}
     </span>
   );
@@ -74,7 +75,7 @@ function DecisionCard({
 }>) {
   return (
     <article className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6">
-      <p className="font-body text-sm font-bold uppercase tracking-[0.18em] text-brand-accent">
+      <p className="font-mono text-sm font-medium uppercase tracking-[0.14em] text-brand-accent">
         Decision {index + 1}
       </p>
       <h3 className="mt-3 font-body text-2xl font-bold text-brand-text">
@@ -169,14 +170,15 @@ function EvidenceSection({
     <section className="border-t border-brand-text/10 px-4 py-14 sm:px-6 md:px-8 lg:px-10 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-4xl">
-          <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
+          <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-accent">
             {evidence.eyebrow}
           </p>
           <h2
             className="mt-3 font-display uppercase text-brand-text"
             style={{
-              fontSize: "clamp(3rem, 7vw, 7rem)",
-              lineHeight: 0.95,
+              fontSize: "clamp(2.125rem, 4vw, 3rem)",
+              fontWeight: 600,
+              lineHeight: 1.08,
             }}
           >
             {evidence.title}
@@ -208,7 +210,7 @@ function CtaLinks({ links }: Readonly<{ links: CaseStudy["links"] }>) {
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-brand-text/20 px-5 py-3 font-body text-sm font-bold text-brand-text transition hover:border-brand-accent hover:bg-brand-accent hover:text-brand-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+          className="inline-flex items-center gap-2 rounded-full border border-brand-text/20 px-5 py-3 font-mono text-sm font-medium text-brand-text transition hover:border-brand-accent hover:bg-brand-accent hover:text-brand-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
         >
           {link.label}
           <ExternalLink className="h-4 w-4" aria-hidden="true" />
@@ -225,21 +227,22 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
         <div className="mx-auto max-w-6xl">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 font-body text-sm font-bold uppercase tracking-[0.16em] text-brand-text-muted transition hover:text-brand-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-accent"
+            className="inline-flex items-center gap-2 font-mono text-sm font-medium uppercase tracking-[0.14em] text-brand-text-muted transition hover:text-brand-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-accent"
           >
             <ArrowRight className="h-4 w-4 rotate-180" aria-hidden="true" />
             Projects
           </Link>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
             <div>
-              <p className="font-body text-sm font-bold uppercase tracking-[0.22em] text-brand-accent">
+              <p className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-brand-accent">
                 {study.subtitle}
               </p>
               <h1
                 className="mt-4 font-display uppercase text-brand-text"
                 style={{
-                  fontSize: "clamp(4.25rem, 14vw, 13rem)",
-                  lineHeight: 0.85,
+                  fontSize: "clamp(2.75rem, 6vw, 5.5rem)",
+                  fontWeight: 600,
+                  lineHeight: 1,
                 }}
               >
                 <TypewriterText text={study.title} speedMs={75} />
@@ -249,7 +252,7 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
               </p>
             </div>
             <div className="rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5">
-              <p className="font-body text-xs font-bold uppercase tracking-[0.18em] text-brand-text-muted">
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.14em] text-brand-text-muted">
                 Platform focus
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -381,11 +384,11 @@ export function CaseStudyTemplate({ study }: Readonly<{ study: CaseStudy }>) {
       <section className="border-t border-brand-text/10 px-5 py-16 sm:px-8 md:px-12 lg:px-16">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="flex items-center gap-2 font-body text-sm font-bold uppercase tracking-[0.18em] text-brand-accent">
+            <p className="flex items-center gap-2 font-mono text-sm font-medium uppercase tracking-[0.14em] text-brand-accent">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               Explore {study.title}
             </p>
-            <h2 className="mt-2 font-display text-4xl uppercase text-brand-text md:text-6xl">
+            <h2 className="mt-2 font-display text-3xl font-semibold uppercase text-brand-text md:text-5xl">
               Platform Links
             </h2>
           </div>

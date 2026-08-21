@@ -107,7 +107,7 @@ export function HeroSection() {
 
           <span
             ref={eyebrowRef}
-            className="font-body text-xl font-bold uppercase tracking-widest text-brand-accent"
+            className="font-mono text-sm font-medium uppercase tracking-[0.14em] text-brand-accent md:text-base"
           >
             {EYEBROW}
           </span>
@@ -120,6 +120,7 @@ export function HeroSection() {
               fontSize: "var(--font-size-display)",
               lineHeight: "var(--leading-display)",
               letterSpacing: "var(--tracking-display)",
+              fontWeight: 600,
             }}
           >
             {HEADLINE}

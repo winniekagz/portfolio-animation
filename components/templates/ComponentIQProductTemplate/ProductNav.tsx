@@ -55,7 +55,7 @@ export function ProductNav() {
                 onClick={(e) => scrollTo(e, item.href)}
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
-                  "block whitespace-nowrap rounded-full px-3 py-1.5 font-body text-xs font-bold uppercase tracking-[0.14em] transition-colors",
+                  "block whitespace-nowrap rounded-full px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.1em] transition-colors",
                   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent",
                   isActive ? "bg-brand-accent/15 text-brand-accent" : "text-brand-text-muted hover:text-brand-text"
                 )}
