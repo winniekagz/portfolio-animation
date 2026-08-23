@@ -52,20 +52,20 @@ function ThreeDMesh() {
     const { x: mx, y: my } = lerpedMouse.current;
     const sp = lerpedScroll.current; // 0 → 1
 
-    // ── Base position (bottom-right corner) ──────────────────────
-    const baseX = viewport.width * 0.38;
-    const baseY = -viewport.height * 0.18;
+    // ── Base position (center specimen for the lab hero) ─────────
+    const baseX = 0;
+    const baseY = -viewport.height * 0.03;
 
     // ── Cursor: position drift + 3-D tilt ────────────────────────
-    meshRef.current.position.x = baseX + mx * 0.55;
-    meshRef.current.position.y = baseY + my * 0.35;
+    meshRef.current.position.x = baseX + mx * 0.28;
+    meshRef.current.position.y = baseY + my * 0.2;
 
     meshRef.current.rotation.y = mx * 0.45;
     meshRef.current.rotation.x = -my * 0.3;
 
     // ── Scroll zoom parallax ──────────────────────────────────────
     // Scale grows from 1 → 2 as the hero scrolls fully out.
-    const zoomScale = 1 + sp * 1.0;
+    const zoomScale = 1.35 + sp * 0.45;
     meshRef.current.scale.set(zoomScale, zoomScale, zoomScale);
 
     // Also push the mesh toward the camera (Z+) for added depth.
@@ -74,7 +74,7 @@ function ThreeDMesh() {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[3.5, 3.5]} />
+      <planeGeometry args={[3.7, 3.7]} />
       <meshBasicMaterial
         map={texture}
         transparent
@@ -87,10 +87,14 @@ function ThreeDMesh() {
 
 export default function Scene() {
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none bg-transparent">
       <R3FCanvas
         camera={{ position: [0, 0, 5], fov: 75 }}
-        gl={{ alpha: true, antialias: true }}
+        gl={{ alpha: true, antialias: true, premultipliedAlpha: false }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
+        style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
           <ThreeDMesh />

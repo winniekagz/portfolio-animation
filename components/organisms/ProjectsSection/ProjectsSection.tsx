@@ -32,7 +32,7 @@ export function ProjectsSection() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
           {caseStudies.map((study) => (
             <article
               key={study.slug}

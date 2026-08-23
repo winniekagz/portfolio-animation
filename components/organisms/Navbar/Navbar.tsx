@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
 import { MenuTrigger } from "@/components/molecules";
 import { cn } from "@/lib/utils";
 import { MENU_ITEMS } from "@/lib/theme";
@@ -58,36 +57,27 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 w-full border-b transition-[background-color] duration-500",
-        "backdrop-blur-md"
+        "fixed top-0 z-40 w-full border-b transition-[background-color] duration-500",
+        "backdrop-blur-sm"
       )}
       style={{
-        borderColor: "rgb(255 255 255 / 0.08)",
-        backgroundColor: scrolled ? "rgba(16, 19, 15, 0.9)" : "rgb(255 255 255 / 0.04)",
+        borderColor: "rgb(242 240 233 / 0.08)",
+        backgroundColor: scrolled ? "rgba(7, 8, 9, 0.86)" : "rgba(7, 8, 9, 0.58)",
       }}
     >
       <nav
-        className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-14"
         aria-label="Main"
       >
-        {/* Logo */}
         <a
           href="#hero"
           onClick={(e) => scrollTo(e, "#hero")}
-          className="flex items-center gap-3 font-display text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          style={{ fontSize: "1.125rem", fontWeight: 500, lineHeight: "var(--leading-h3)" }}
+          className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#F2F0E9] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E0A8C6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070809] md:text-xs"
         >
-          <Image
-            src="/image/win.jpeg"
-            alt=""
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-full object-cover object-top"
-          />
-          <span>Winfred Kagendo</span>
+          <span className="h-2 w-2 rounded-full bg-[#E0A8C6]" aria-hidden="true" />
+          <span>Labs / Winfred Kagendo</span>
         </a>
 
-        {/* Horizontal nav — lg and above only */}
         <ul className="hidden items-center gap-8 lg:flex">
           {MENU_ITEMS.map((item) => {
             const isActive = activeHref === item.href;
@@ -98,18 +88,16 @@ export function Navbar() {
                   onClick={(e) => scrollTo(e, item.href)}
                   className={cn(
                     "group relative block overflow-hidden leading-none",
-                    "font-mono text-sm font-medium uppercase tracking-[0.08em]",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    isActive ? "text-brand-accent" : "text-foreground/60"
+                    "font-mono text-[11px] font-medium uppercase tracking-[0.14em]",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E0A8C6]",
+                    isActive ? "text-[#E0A8C6]" : "text-[#858B92]"
                   )}
                 >
-                  {/* Span 1 – visible at rest, slides out above on hover */}
                   <span className="block transition-transform duration-300 ease-out group-hover:-translate-y-full">
                     {item.label}
                   </span>
-                  {/* Span 2 – hidden below at rest, slides up into view on hover */}
                   <span
-                    className="absolute inset-x-0 top-full block text-brand-accent transition-transform duration-300 ease-out group-hover:-translate-y-full"
+                    className="absolute inset-x-0 top-full block text-[#E0A8C6] transition-transform duration-300 ease-out group-hover:-translate-y-full"
                     aria-hidden
                   >
                     {item.label}
@@ -120,7 +108,6 @@ export function Navbar() {
           })}
         </ul>
 
-        {/* Menu trigger — visible on all sizes to open the full overlay */}
         <MenuTrigger />
       </nav>
     </header>

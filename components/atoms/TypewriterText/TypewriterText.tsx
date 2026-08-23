@@ -25,7 +25,7 @@ export function TypewriterText({
     }
 
     let index = 0;
-    let typingTimer: ReturnType<typeof window.setTimeout>;
+    let typingTimer: number | undefined;
     const startTimer = window.setTimeout(() => {
       const typeNextCharacter = () => {
         index += 1;
@@ -41,7 +41,7 @@ export function TypewriterText({
 
     return () => {
       window.clearTimeout(startTimer);
-      window.clearTimeout(typingTimer);
+      if (typingTimer) window.clearTimeout(typingTimer);
     };
   }, [prefersReducedMotion, speedMs, startDelayMs, text]);
 
