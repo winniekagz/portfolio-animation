@@ -10,11 +10,58 @@ import {
   Navbar,
   SiteFooter,
 } from "@/components/organisms";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Winfred Kagendo | Senior Frontend & Product Engineer",
+  metadataBase: new URL("https://labs.winfredkagendo.com"),
+  title: {
+    default: "Winfred Kagendo Labs | Frontend Systems, UI Engineering & System Design",
+    template: "%s | Winfred Kagendo Labs",
+  },
   description:
-    "Portfolio of Winfred Kagendo, a Nairobi-based Senior Frontend and Product Engineer focused on frontend architecture, React, Next.js, React Native, design systems, performance, and AI product engineering.",
+    "Engineering experiments by Winfred Kagendo exploring frontend architecture, UI engineering, UX, system design, payments, performance, and product engineering.",
+  keywords: [
+    "Winfred Kagendo",
+    "Frontend Engineering",
+    "UI Engineering",
+    "System Design",
+    "Product Engineering",
+    "React",
+    "Next.js",
+    "TypeScript",
+  ],
+  authors: [{ name: "Winfred Kagendo", url: "https://winfredkagendo.com" }],
+  creator: "Winfred Kagendo",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://labs.winfredkagendo.com",
+    siteName: "Winfred Kagendo Labs",
+    title: "Winfred Kagendo Labs | Frontend Systems, UI Engineering & System Design",
+    description:
+      "Engineering experiments exploring frontend architecture, UI engineering, UX, system design, and product engineering.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Winfred Kagendo Labs",
+    description:
+      "Engineering experiments exploring frontend architecture, UI engineering, UX, system design, and product engineering.",
+    creator: "@winfredkagendo",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://labs.winfredkagendo.com",
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +78,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <JsonLd />
       </head>
       <body className="antialiased bg-background text-foreground">
         <LenisProvider>

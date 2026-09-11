@@ -20,24 +20,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!experiment) {
     return {
-      title: "Experiment Not Found | Labs",
+      title: "Experiment Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
   const isImplemented = slug in experimentComponents;
+  const canonicalUrl = `https://labs.winfredkagendo.com/experiments/${slug}`;
 
   return {
     title: isImplemented
-      ? `${experiment.title} | Labs`
-      : `Coming Soon: ${experiment.title} | Labs`,
-    description: experiment.question,
+      ? experiment.title
+      : `Coming Soon: ${experiment.title}`,
+    description: experiment.quip || experiment.question,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: isImplemented
-        ? `${experiment.title} | Labs`
-        : `Coming Soon: ${experiment.title} | Labs`,
+        ? `${experiment.title} | Winfred Kagendo Labs`
+        : `Coming Soon: ${experiment.title} | Winfred Kagendo Labs`,
       description: experiment.quip || experiment.question,
+      url: canonicalUrl,
       type: "article",
+      authors: ["Winfred Kagendo"],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: experiment.title,
+      description: experiment.question,
+    },
+    // Don't index "coming soon" pages heavily
+    robots: isImplemented
+      ? { index: true, follow: true }
+      : { index: true, follow: true },
   };
 }
 
