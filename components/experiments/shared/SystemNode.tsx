@@ -1,13 +1,13 @@
 "use client";
 
 import { forwardRef } from "react";
-import { Server, Cloud, Database, Shield, Monitor, Box } from "lucide-react";
+import { Server, Cloud, Database, Shield, Monitor, Box, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NodeState = "default" | "active" | "success" | "rejected" | "dimmed";
 type NodeIcon = "client" | "server" | "service" | "limiter" | "database" | "lb";
 
-const iconMap: Record<NodeIcon, React.ElementType> = {
+const iconMap: Record<NodeIcon, LucideIcon> = {
   client: Monitor,
   server: Server,
   service: Cloud,

@@ -172,7 +172,7 @@ function simulatorReducer(state: SimulatorState, action: SimulatorAction): Simul
 
 export function useRateLimitSimulator() {
   const [state, dispatch] = useReducer(simulatorReducer, initialState);
-  const animationTimeoutRef = useRef<NodeJS.Timeout>();
+  const animationTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const sendRequest = useCallback(
     (serverId?: "a" | "b") => {
