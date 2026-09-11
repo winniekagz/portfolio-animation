@@ -340,6 +340,39 @@ export const conceptNodes: ThoughtNode[] = [
     status: "exploring",
     description: "Staying in sync.",
   },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // AI INTEGRATION RABBIT HOLE (Product → AI → Prompts → Outputs → Trust)
+  // ═══════════════════════════════════════════════════════════════════════════
+  {
+    id: "ai-integration",
+    label: "AI Integration",
+    category: "product",
+    status: "exploring",
+    experimentSlug: "jobflow-ai-job-search",
+    description: "AI as a tool, not magic.",
+  },
+  {
+    id: "prompt-engineering",
+    label: "Prompt Engineering",
+    category: "product",
+    status: "exploring",
+    description: "Constraining what AI should do.",
+  },
+  {
+    id: "structured-outputs",
+    label: "Structured Outputs",
+    category: "frontend",
+    status: "exploring",
+    description: "Machine-readable AI responses.",
+  },
+  {
+    id: "llm-apis",
+    label: "LLM APIs",
+    category: "systems",
+    status: "exploring",
+    description: "AI as a service endpoint.",
+  },
 ];
 
 // ─── All Nodes Combined ──────────────────────────────────────────────────────
@@ -459,6 +492,21 @@ export const edges: ThoughtEdge[] = [
   
   // A11y connects across
   { source: "a11y", target: "design-systems" },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // AI INTEGRATION RABBIT HOLE
+  // Product → AI Integration → Prompt Engineering → Structured Outputs → Trust
+  // ═══════════════════════════════════════════════════════════════════════════
+  { source: "product", target: "ai-integration" },
+  { source: "ai-integration", target: "prompt-engineering" },
+  { source: "prompt-engineering", target: "structured-outputs" },
+  { source: "structured-outputs", target: "trust" },
+  { source: "ai-integration", target: "llm-apis" },
+  { source: "llm-apis", target: "reliability" },
+  
+  // AI ↔ Other domains
+  { source: "prompt-engineering", target: "constraints" },
+  { source: "structured-outputs", target: "async" },
 ];
 
 // ─── Experiments ─────────────────────────────────────────────────────────────
@@ -523,6 +571,12 @@ export const nodePositions: Record<string, NodePosition> = {
   tradeoffs: { x: 35, y: 15 },
   constraints: { x: 50, y: 10 },
   scope: { x: 65, y: 15 },
+
+  // AI Integration chain (connected to product, flows toward trust and reliability)
+  "ai-integration": { x: 62, y: 23 },
+  "prompt-engineering": { x: 77, y: 15 },
+  "structured-outputs": { x: 77, y: 5 },
+  "llm-apis": { x: 62, y: 5 },
 
   // ═══════════════════════════════════════════════════════════════════════════
   // UI SECTOR (far left column)

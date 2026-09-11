@@ -4,7 +4,7 @@ import { caseStudies } from "@/lib/data/case-studies";
 import { experiments } from "@/lib/data/thought-graph";
 
 const visibleCaseStudies = caseStudies.filter((study) =>
-  ["offline-first-engineering", "componentiq"].includes(study.slug),
+  ["offline-first-engineering", "componentiq", "jobflow-ai-job-search"].includes(study.slug),
 );
 
 export default function ProjectsPage() {
@@ -27,9 +27,16 @@ export default function ProjectsPage() {
               key={study.slug}
               className="group rounded-lg border border-brand-text/10 bg-brand-surface/70 p-6 transition hover:border-brand-accent/60"
             >
-              <p className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-brand-accent">
-                {study.subtitle}
-              </p>
+              <div className="flex items-center gap-3">
+                <p className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-brand-accent">
+                  {study.subtitle}
+                </p>
+                {study.slug === "jobflow-ai-job-search" && (
+                  <span className="rounded-full border border-yellow-500/30 bg-yellow-500/10 px-2 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-yellow-400">
+                    In Progress
+                  </span>
+                )}
+              </div>
               <h2 className="mt-4 font-display text-[2.125rem] font-medium uppercase leading-tight text-brand-text md:text-6xl">
                 {study.title}
               </h2>

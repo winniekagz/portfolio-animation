@@ -23,4 +23,10 @@ export const techStack: TechCategory[] = [
     description: "Where I'm building fluency",
     items: ["NestJS", "Redis", "Docker", "Queues", "Cloud / Infrastructure"],
   },
+  {
+    id: "ai-tooling",
+    title: "AI & Developer Tooling",
+    description: "Extending my workflow with AI",
+    items: ["Claude API", "LLM Integration", "Prompt Engineering"],
+  },
 ];

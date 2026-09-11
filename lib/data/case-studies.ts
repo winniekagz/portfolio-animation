@@ -721,6 +721,226 @@ export const caseStudies: CaseStudy[] = [
   //     "If I expanded this section, I would separate production work, independent analysis, and speculative product exercises with clear labels.",
   //   ],
   // },
+  {
+    slug: "jobflow-ai-job-search",
+    title: "JobFlow",
+    subtitle: "AI-Assisted Job Search — In Progress",
+    description:
+      "A Next.js application that integrates Claude AI for resume tailoring and job fit evaluation. An exploration of what happens when you treat AI as a tool inside a real product instead of a standalone chat interface.",
+    tags: [
+      "Next.js 14",
+      "TypeScript",
+      "Claude API",
+      "Prompt Engineering",
+      "NextAuth.js",
+      "Prisma",
+      "Product Engineering",
+    ],
+    links: [],
+    problem: [
+      "Job applications are repetitive: copy job description, manually tailor resume, write cover letter, repeat.",
+      "Fit evaluation is subjective and time-consuming when done manually for every posting.",
+      "Generic LLM responses hallucinate skills and exaggerate experience unless explicitly constrained.",
+      "AI-as-a-chat-interface does not integrate cleanly into a product workflow with state, persistence, and authentication.",
+    ],
+    productGoal:
+      "Build a working job search product where Claude handles tailoring and evaluation while the user stays in control of the final output and application decisions.",
+    users: [
+      {
+        title: "Job seekers",
+        description:
+          "Need faster, more consistent resume tailoring without sacrificing accuracy.",
+      },
+      {
+        title: "Engineers exploring AI integration",
+        description:
+          "Need evidence that LLM APIs can be wrapped into product workflows with structured outputs and accuracy constraints.",
+      },
+    ],
+    systemParts: [
+      {
+        title: "Claude Integration Layer",
+        description:
+          "API routes wrapping the Anthropic SDK with system prompts that enforce accuracy constraints, writing style rules, and structured output formats.",
+      },
+      {
+        title: "Resume Tailoring",
+        description:
+          "Given a master CV and job description, Claude rewrites the resume with bullet reordering, keyword alignment, and explicit anti-hallucination rules.",
+      },
+      {
+        title: "Job Fit Evaluation",
+        description:
+          "Claude scores jobs as high, medium, low, or skip against the candidate profile and preferences, returning structured JSON.",
+      },
+      {
+        title: "Authentication",
+        description:
+          "NextAuth.js with Google OAuth, Prisma adapter, protected routes via middleware, and returnTo URL preservation.",
+      },
+      {
+        title: "State Management",
+        description:
+          "Zustand with persistence middleware for client-side job and profile data. Prisma and SQLite for authenticated user data and search run history.",
+      },
+    ],
+    architectureTree: `jobflow/
+  app/
+    page.tsx              (landing)
+    login/                (OAuth flow)
+    (dashboard)/          (protected routes)
+    api/
+      auth/               (NextAuth handlers)
+      tailor/route.ts     (Claude → tailored resume)
+      cover-letter/       (Claude → cover letter)
+      evaluate/           (Claude → fit scoring)
+  lib/
+    claude.ts             (Anthropic SDK + prompts)
+    auth.ts               (NextAuth + Prisma adapter)
+    store.ts              (Zustand + persistence)
+  domain/
+    job-search/
+      orchestrator.ts     (multi-source coordination)
+  prisma/
+    schema.prisma         (User, Session, JobSearchRun)`,
+    architectureNotes: [
+      "AI endpoints are standard Next.js API routes — no special runtime, just HTTP and the Anthropic SDK.",
+      "System prompts include explicit accuracy rules to prevent fabrication and scope inflation.",
+      "Two-layer state: Zustand for client persistence, Prisma for authenticated server data.",
+      "The orchestrator skeleton exists for future multi-source job discovery but sources are not yet connected.",
+    ],
+    decisions: [
+      {
+        title: "Wrap Claude in API routes, not client-side calls",
+        reason:
+          "API keys stay server-side. The client never sees the Anthropic SDK or raw prompts.",
+        tradeoff: "Adds a round-trip compared to edge functions.",
+        outcome:
+          "Simpler security model. The frontend treats AI as a service endpoint like any other API.",
+      },
+      {
+        title: "System prompt includes explicit anti-hallucination rules",
+        reason:
+          "Resume tailoring fails if Claude invents skills or inflates scope. The prompt enforces only use information explicitly provided.",
+        tradeoff: "The prompt is longer and more prescriptive.",
+        outcome:
+          "Tailored resumes stay accurate to the source material. The user can trust the output.",
+      },
+      {
+        title: "Return structured JSON for fit scoring",
+        reason:
+          "The UI needs a machine-readable fit score (high, medium, low, skip) and a human-readable explanation.",
+        tradeoff: "Requires parsing and validation on the server.",
+        outcome:
+          "Clean separation between AI response and UI display. Fit badges render directly from JSON.",
+      },
+      {
+        title: "Zustand for client state, Prisma for server state",
+        reason:
+          "Job data and profile content should survive page refresh (client). Authenticated user records and search history belong in a database (server).",
+        tradeoff: "Two persistence layers to maintain.",
+        outcome:
+          "Each layer handles what it is good at. No awkward workarounds for authentication or offline-first client state.",
+      },
+    ],
+    workflows: [
+      {
+        title: "Resume Tailoring",
+        steps: [
+          "User adds a job (URL or pasted description)",
+          "System auto-evaluates fit via Claude",
+          "User requests tailored resume",
+          "Claude rewrites resume with job-specific keywords and reordering",
+          "User reviews, copies, or downloads the result",
+        ],
+      },
+      {
+        title: "Job Fit Evaluation",
+        steps: [
+          "User pastes job description",
+          "Claude scores against profile and preferences",
+          "System returns fit (high/medium/low/skip) + notes",
+          "User decides whether to pursue the job",
+        ],
+      },
+      {
+        title: "Cover Letter Generation",
+        steps: [
+          "User selects a job with a saved description",
+          "Claude generates a cover letter connecting experience to the role",
+          "User reviews and edits as needed",
+        ],
+      },
+    ],
+    designSystem: [
+      "Built with shadcn/ui components for consistent form controls, cards, and badges.",
+      "Tailwind CSS for layout and spacing, following the Labs design token scale where applicable.",
+      "Fit scores display as colored badges: green (high), yellow (medium), gray (low), red (skip).",
+      "Markdown output from Claude is rendered with react-markdown for clean formatting.",
+    ],
+    scope: {
+      included: [
+        "Resume tailoring via Claude API",
+        "Cover letter generation",
+        "Job fit evaluation with structured scoring",
+        "Google OAuth authentication",
+        "Protected routes with middleware",
+        "Client-side state persistence (Zustand)",
+        "Database schema for users, sessions, search runs",
+        "Orchestrator skeleton for future job discovery",
+      ],
+      excluded: [
+        "Automated job board scraping (planned, not built)",
+        "PDF export",
+        "Email integration",
+        "Interview scheduling",
+        "Company research automation",
+        "Real-time job alerts",
+      ],
+    },
+    roadmap: [
+      {
+        title: "V1 Shipped",
+        items: [
+          "Claude API integration for tailoring, cover letters, fit scoring",
+          "Google OAuth and protected routes",
+          "Manual job adding with auto-evaluation",
+          "Zustand persistence for profile and job data",
+          "Database schema for authenticated data",
+        ],
+      },
+      {
+        title: "V2 Discovery",
+        items: [
+          "Connect job source adapters (LinkedIn, Greenhouse, Lever)",
+          "Orchestrator coordination across sources",
+          "Deduplication and incremental search runs",
+          "SSE progress updates for long searches",
+        ],
+      },
+      {
+        title: "V3 Polish",
+        items: [
+          "PDF export for tailored resumes",
+          "Token usage tracking and caching",
+          "Semantic job matching with embeddings",
+          "Interview prep module",
+        ],
+      },
+    ],
+    impact: [
+      "Demonstrates that LLM APIs can be integrated into product workflows, not just chat interfaces.",
+      "Shows prompt engineering with accuracy constraints — the opposite of letting Claude freestyle.",
+      "Creates a usable tool while exploring the engineering patterns underneath.",
+      "Documents the gap between AI can do this and this is a shipped product.",
+    ],
+    reflection: [
+      "AI integration is mostly plumbing: API routes, error handling, structured outputs, and prompt iteration.",
+      "The hard part is not calling Claude — it is defining what Claude should and should not do, then enforcing it in the prompt.",
+      "Human-in-the-loop is not a limitation; it is the product design. The user reviews everything before it leaves the app.",
+      "Next, I would add caching to reduce API costs, connect real job sources, and build better feedback loops when Claude output misses the mark.",
+    ],
+  },
 ];
 
 export function getCaseStudy(slug: string) {
