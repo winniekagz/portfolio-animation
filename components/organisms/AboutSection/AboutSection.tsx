@@ -10,7 +10,7 @@ import { GitHubIcon, LinkedInIcon } from "@/components/atoms";
 // ─── copy ────────────────────────────────────────────────────────────────────
 const HEADLINE = "I own product surfaces where frontend architecture, business constraints, and user experience meet.";
 const BIO =
-  "I am a Product and Frontend Engineer based in Nairobi with 5+ years across AI, fintech, healthcare, SaaS, and mobile. My work spans React, Next.js, TypeScript, React Native, design systems, performance, accessibility, and AI integrations, with the emphasis on engineering decisions that help teams ship durable products.";
+  "Product and Frontend Engineer in Nairobi. 5+ years shipping across AI, fintech, healthcare, and mobile. I care about the system and the human using it.";
 const SOCIAL = [
   { Icon: GitHubIcon,   label: "GitHub",   href: "https://github.com/winniekagz",                        external: true },
   { Icon: LinkedInIcon, label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/",   external: true },

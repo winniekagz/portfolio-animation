@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { caseStudies } from "@/lib/data/case-studies";
+import { experiments } from "@/lib/data/thought-graph";
 
 const visibleCaseStudies = caseStudies.filter((study) =>
   ["offline-first-engineering", "componentiq"].includes(study.slug),
@@ -50,6 +51,58 @@ export default function ProjectsPage() {
                 className="mt-7 inline-flex items-center gap-2 rounded-full border border-brand-text/20 px-5 py-3 font-mono text-sm font-medium text-brand-text transition group-hover:border-brand-accent group-hover:bg-brand-accent group-hover:text-brand-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
               >
                 Read case study
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Labs / Experiments Section */}
+      <section id="labs" className="mx-auto mt-24 max-w-6xl">
+        <h2
+          className="font-display uppercase text-foreground"
+          style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 600, lineHeight: 1 }}
+        >
+          Labs
+        </h2>
+        <p className="mt-4 max-w-[65ch] font-body text-body leading-body text-muted-foreground">
+          Interactive investigations into how things work. Each experiment starts with a question and follows the rabbit hole.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {experiments.map((exp) => (
+            <article
+              key={exp.slug}
+              className="group flex flex-col rounded-lg border border-brand-text/10 bg-brand-surface/70 p-5 transition hover:border-brand-accent/60"
+            >
+              <p className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-brand-accent">
+                Experiment / {exp.number}
+              </p>
+              <h3 className="mt-3 font-display text-xl font-semibold leading-tight text-brand-text">
+                {exp.title}
+              </h3>
+              <p className="mt-2 font-body text-sm leading-relaxed text-brand-text-muted">
+                {exp.question}
+              </p>
+              <p className="mt-3 font-mono text-xs italic text-brand-text-muted/70">
+                "{exp.quip}"
+              </p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {exp.ledTo.slice(0, 3).map((concept) => (
+                  <span
+                    key={concept}
+                    className="rounded border border-brand-text/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-brand-text-muted"
+                  >
+                    {concept}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href={`/experiments/${exp.slug}`}
+                className="mt-auto pt-5 inline-flex items-center gap-2 font-mono text-sm font-medium text-brand-accent transition hover:text-brand-accent-hover"
+              >
+                Explore
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </article>

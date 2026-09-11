@@ -13,16 +13,28 @@ export const MENU_ITEMS = [
     previewAlt: "About section",
   },
   {
-    label: "Experience",
-    href: "#experience",
+    label: "Rabbit Hole",
+    href: "#rabbit-hole",
     preview: "/image/service.jpg",
-    previewAlt: "Experience section",
+    previewAlt: "Current rabbit hole section",
   },
   {
     label: "Projects",
     href: "#projects",
     preview: "/image/blue-abstract.png",
     previewAlt: "Projects and case studies section",
+  },
+  {
+    label: "Brain",
+    href: "#meet-my-brain",
+    preview: "/image/plan.jpg",
+    previewAlt: "How I think section",
+  },
+  {
+    label: "Background",
+    href: "#professional",
+    preview: "/image/service.jpg",
+    previewAlt: "Professional background section",
   },
   {
     label: "Blog",

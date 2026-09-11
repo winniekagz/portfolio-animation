@@ -1,9 +1,12 @@
 import {
   AboutSection,
+  BeliefsSection,
   ContactSection,
-  ExperienceSection,
   HeroSection,
+  MeetMyBrainSection,
+  ProfessionalSection,
   ProjectsSection,
+  RabbitHoleSection,
 } from "@/components/organisms";
 import { BlogTemplate } from "@/components/templates";
 
@@ -13,8 +16,11 @@ export default function Home() {
     <>
       <HeroSection />
       <AboutSection />
-      <ExperienceSection />
+      <RabbitHoleSection />
       <ProjectsSection />
+      <MeetMyBrainSection />
+      <BeliefsSection />
+      <ProfessionalSection />
       <BlogTemplate />
       <ContactSection />
     </>
