@@ -111,7 +111,7 @@ export function HeroSection() {
             Winfred Kagendo
           </h1>
           <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-[#B9B3B8] md:text-xl">
-            Senior Frontend & Product Engineer
+            A software engineer with a frontend heart.
           </p>
         </div>
 
