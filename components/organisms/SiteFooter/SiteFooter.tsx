@@ -46,8 +46,8 @@ const NAV_LINKS = [
 const SOCIAL_LINKS = [
   { label: "GitHub",   href: "https://github.com/winniekagz",                      Icon: GitHubIcon },
   { label: "LinkedIn", href: "https://linkedin.com/in/winfred-kagendo-3b099220b/", Icon: LinkedInIcon },
-  { label: "Medium", href: "https://medium.com", Icon: MediumIcon },
-  { label: "Twitter", href: "https://twitter.com", Icon: TwitterIcon },
+  { label: "Medium",   href: "https://medium.com/@winniekagendo35",                Icon: MediumIcon },
+  { label: "X",        href: "https://x.com/winniekagendo12",                      Icon: TwitterIcon },
 ];
 
 export function SiteFooter() {

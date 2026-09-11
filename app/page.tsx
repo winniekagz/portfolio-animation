@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Winfred Kagendo Labs | Frontend Systems, UI Engineering & System Design",
     description:
-      "Engineering experiments exploring frontend architecture, UI engineering, UX, system design, and product engineering.",
+      "I'm Winfred Kagendo, a software engineer with a frontend heart. Labs is where I explore frontend architecture, UI engineering, UX, system design, and product engineering.",
     url: "https://labs.winfredkagendo.com",
     type: "website",
   },

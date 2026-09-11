@@ -1,3 +1,8 @@
+interface Organization {
+  "@type": "Organization";
+  name: string;
+}
+
 interface PersonSchema {
   "@context": "https://schema.org";
   "@type": "Person";
@@ -6,6 +11,7 @@ interface PersonSchema {
   url: string;
   sameAs: string[];
   jobTitle: string;
+  worksFor?: Organization;
   knowsAbout: string[];
   email?: string;
 }
@@ -28,10 +34,16 @@ const personSchema: PersonSchema = {
   url: "https://winfredkagendo.com",
   sameAs: [
     "https://github.com/winniekagz",
-    "https://linkedin.com/in/winfred-kagendo-3b099220b/",
+    "https://www.linkedin.com/in/winfred-kagendo-3b099220b/",
     "https://labs.winfredkagendo.com",
+    "https://medium.com/@winniekagendo35",
+    "https://x.com/winniekagendo12",
   ],
-  jobTitle: "Software Engineer",
+  jobTitle: "Senior Frontend & Product Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Supernomics",
+  },
   knowsAbout: [
     "Frontend Engineering",
     "Frontend Architecture",
@@ -43,6 +55,8 @@ const personSchema: PersonSchema = {
     "React",
     "Next.js",
     "TypeScript",
+    "React Native",
+    "Design Systems",
   ],
   email: "hello@winfredkagendo.com",
 };
